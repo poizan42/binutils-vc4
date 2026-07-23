@@ -1643,6 +1643,8 @@ enum bfd_architecture
   bfd_arch_mt,
 #define bfd_mach_ms1           1
 #define bfd_mach_mrisc2        2
+  bfd_arch_vc4,      /* Broadcom VideoCore IV.  */
+#define bfd_mach_vc4           2
 #define bfd_mach_ms2           3
   bfd_arch_pj,
   bfd_arch_avr,       /* Atmel AVR microcontrollers.  */
@@ -5994,6 +5996,28 @@ enum bfd_reloc_code_real
 
   /* Morpho MT - 8 bit immediate relocation.  */
   BFD_RELOC_MT_PCINSN8,
+
+  /* Broadcom VideoCore IV (VC4) relocations.  */
+  BFD_RELOC_VC4_REL7_MUL2,
+  BFD_RELOC_VC4_REL8_MUL2,
+  BFD_RELOC_VC4_REL10_MUL2,
+  BFD_RELOC_VC4_REL16,
+  BFD_RELOC_VC4_REL23_MUL2,
+  BFD_RELOC_VC4_REL27,
+  BFD_RELOC_VC4_REL27_MUL2,
+  BFD_RELOC_VC4_REL32,
+  BFD_RELOC_VC4_IMM5_MUL4,
+  BFD_RELOC_VC4_IMM5_1,
+  BFD_RELOC_VC4_IMM5_2,
+  BFD_RELOC_VC4_IMM6,
+  BFD_RELOC_VC4_IMM6_MUL4,
+  BFD_RELOC_VC4_IMM11,
+  BFD_RELOC_VC4_IMM12,
+  BFD_RELOC_VC4_IMM16,
+  BFD_RELOC_VC4_IMM23,
+  BFD_RELOC_VC4_IMM27,
+  BFD_RELOC_VC4_IMM32,
+  BFD_RELOC_VC4_IMM32_2,
 
   /* msp430 specific relocation codes.  */
   BFD_RELOC_MSP430_10_PCREL,

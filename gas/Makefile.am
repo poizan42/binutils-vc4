@@ -185,6 +185,7 @@ TARGET_CPU_CFILES = \
 	config/tc-moxie.c \
 	config/tc-msp430.c \
 	config/tc-mt.c \
+	config/tc-vc4.c \
 	config/tc-nds32.c \
 	config/tc-ns32k.c \
 	config/tc-or1k.c \
@@ -258,6 +259,7 @@ TARGET_CPU_HFILES = \
 	config/tc-mn10300.h \
 	config/tc-msp430.h \
 	config/tc-mt.h \
+	config/tc-vc4.h \
 	config/tc-nds32.h \
 	config/tc-ns32k.h \
 	config/tc-or1k.h \

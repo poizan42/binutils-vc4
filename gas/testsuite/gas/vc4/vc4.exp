@@ -1,0 +1,34 @@
+# run tests for target VC4.
+
+if [istarget vc4-*-*] then {
+# test redefinitions
+    run_dump_test "redef"
+# test parsing of equ definitions
+    run_dump_test "equ"
+# test parsing of " and '
+    run_dump_test "quotes"
+    run_dump_test "simple_rts"
+    run_dump_test "tracer_reduced"
+    run_dump_test "test_values1"
+    run_dump_test "opcodes_simple"
+    run_dump_test "opcodes_push"
+    run_dump_test "bne_1"
+    run_dump_test "bne_2"
+    run_dump_test "cmpreg"
+    run_dump_test "shift-aliases"
+    run_dump_test "conditional"
+    run_dump_test "load_store"
+    run_dump_test "switch"
+    run_dump_test "switch2"
+    run_dump_test "switch3"
+    run_dump_test "switch4"
+    run_dump_test "switch5"
+    run_dump_test "vldst"
+    run_dump_test "dash"
+    run_dump_test "ldst"
+    run_dump_test "ldsthiregind"
+    run_dump_test "pcrel"
+    run_dump_test "add16i"
+    run_dump_test "addsubscale"
+    run_dump_test "shiftedalu"
+}

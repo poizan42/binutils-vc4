@@ -481,6 +481,7 @@ HFILES = \
 	mep-desc.h mep-opc.h \
 	microblaze-opc.h \
 	mt-desc.h mt-opc.h \
+	vc4-desc.h vc4-opc.h \
 	score-opc.h \
 	sh-opc.h \
 	sysdep.h \
@@ -614,10 +615,15 @@ TARGET32_LIBOPCODES_CFILES = \
 	msp430-decode.c \
 	msp430-dis.c \
 	mt-asm.c \
+	vc4-asm.c \
 	mt-desc.c \
+	vc4-desc.c \
 	mt-dis.c \
+	vc4-dis.c \
 	mt-ibld.c \
+	vc4-ibld.c \
 	mt-opc.c \
+	vc4-opc.c \
 	nds32-asm.c \
 	nds32-dis.c \
 	ns32k-dis.c \

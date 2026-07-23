@@ -497,6 +497,8 @@ mcore-*-elf)		targ_emul=elf32mcore
 			;;
 mep-*-elf)		targ_emul=elf32mep
 			;;
+vc4-*-elf)		targ_emul=elf32vc4
+			;;
 metag-*-*)		targ_emul=elf32metag
 			;;
 microblazeel*-linux*)	targ_emul="elf32mbel_linux"

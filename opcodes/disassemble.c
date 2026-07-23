@@ -72,6 +72,7 @@
 #define ARCH_mn10300
 #define ARCH_moxie
 #define ARCH_mt
+#define ARCH_vc4
 #define ARCH_msp430
 #define ARCH_nds32
 #define ARCH_ns32k
@@ -282,6 +283,11 @@ disassembler (enum bfd_architecture a,
 #ifdef ARCH_mt
     case bfd_arch_mt:
       disassemble = print_insn_mt;
+      break;
+#endif
+#ifdef ARCH_vc4
+    case bfd_arch_vc4:
+      disassemble = print_insn_vc4;
       break;
 #endif
 #ifdef ARCH_microblaze

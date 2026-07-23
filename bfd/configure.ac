@@ -538,6 +538,7 @@ do
     msp430_elf32_vec)		 tb="$tb elf32-msp430.lo elf32.lo $elf" ;;
     msp430_elf32_ti_vec)	 tb="$tb elf32-msp430.lo elf32.lo $elf" ;;
     mt_elf32_vec)		 tb="$tb elf32-mt.lo elf32.lo $elf" ;;
+    vc4_elf32_vec)		 tb="$tb elf32-vc4.lo elf32.lo $elf" ;;
     nds32_elf32_be_vec)		 tb="$tb elf32-nds32.lo elf32.lo $elf" ;;
     nds32_elf32_le_vec)		 tb="$tb elf32-nds32.lo elf32.lo $elf" ;;
     nds32_elf32_linux_be_vec)	 tb="$tb elf32-nds32.lo elf32.lo $elf" ;;

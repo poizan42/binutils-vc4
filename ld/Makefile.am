@@ -254,6 +254,7 @@ ALL_EMULATION_SOURCES = \
 	eelf32microblazeel.c \
 	eelf32moxie.c \
 	eelf32mt.c \
+	eelf32vc4.c \
 	eelf32or1k.c \
 	eelf32or1k_linux.c \
 	eelf32ppc.c \

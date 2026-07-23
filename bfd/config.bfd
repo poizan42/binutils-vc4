@@ -1029,6 +1029,9 @@ case "${targ}" in
   mt-*-elf)
     targ_defvec=mt_elf32_vec
     ;;
+  vc4-*-elf)
+    targ_defvec=vc4_elf32_vec
+    ;;
 
   msp430-*-*)
     targ_defvec=msp430_elf32_vec

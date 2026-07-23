@@ -830,6 +830,7 @@ extern const bfd_target moxie_elf32_le_vec;
 extern const bfd_target msp430_elf32_vec;
 extern const bfd_target msp430_elf32_ti_vec;
 extern const bfd_target mt_elf32_vec;
+extern const bfd_target vc4_elf32_vec;
 extern const bfd_target nds32_elf32_be_vec;
 extern const bfd_target nds32_elf32_le_vec;
 extern const bfd_target nds32_elf32_linux_be_vec;
@@ -1205,6 +1206,7 @@ static const bfd_target * const _bfd_target_vector[] =
 	&msp430_elf32_ti_vec,
 
 	&mt_elf32_vec,
+	&vc4_elf32_vec,
 
 	&nds32_elf32_be_vec,
 	&nds32_elf32_le_vec,

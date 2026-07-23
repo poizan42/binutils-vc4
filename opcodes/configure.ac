@@ -307,6 +307,7 @@ if test x${all_targets} = xfalse ; then
 	bfd_mn10200_arch)	ta="$ta m10200-dis.lo m10200-opc.lo" ;;
 	bfd_mn10300_arch)	ta="$ta m10300-dis.lo m10300-opc.lo" ;;
 	bfd_mt_arch)		ta="$ta mt-asm.lo mt-desc.lo mt-dis.lo mt-ibld.lo mt-opc.lo" using_cgen=yes ;;
+	bfd_vc4_arch)		ta="$ta vc4-asm.lo vc4-desc.lo vc4-dis.lo vc4-ibld.lo vc4-opc.lo" using_cgen=yes ;;
 	bfd_msp430_arch)	ta="$ta msp430-dis.lo msp430-decode.lo" ;;
 	bfd_nds32_arch)		ta="$ta nds32-asm.lo nds32-dis.lo" ;;
 	bfd_nfp_arch)		ta="$ta nfp-dis.lo" ;;

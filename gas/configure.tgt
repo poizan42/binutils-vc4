@@ -85,6 +85,7 @@ case ${cpu} in
   mips*el)		cpu_type=mips endian=little ;;
   mips*)		cpu_type=mips endian=big ;;
   mt)			cpu_type=mt endian=big ;;
+  vc4)			cpu_type=vc4 endian=little ;;
   nds32be)		cpu_type=nds32 endian=big ;;
   nds32le)		cpu_type=nds32 endian=little ;;
   or1k* | or1knd*)	cpu_type=or1k endian=big ;;
@@ -340,6 +341,7 @@ case ${generic_target} in
   moxie-*-*)				fmt=elf ;;
     
   mt-*-elf)				fmt=elf bfd_gas=yes ;;
+  vc4-*-elf)				fmt=elf bfd_gas=yes ;;
 
   msp430-*-*)				fmt=elf ;;
 

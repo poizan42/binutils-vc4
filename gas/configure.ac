@@ -517,6 +517,9 @@ changequote([,])dnl
       mt)
 	using_cgen=yes
 	;;
+      vc4)
+	using_cgen=yes
+	;;
 
       nds32)
 	# setup NDS32_LINUX_TOOLCHAIN definition

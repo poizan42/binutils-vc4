@@ -76,6 +76,7 @@ HFILES = \
 	mep-desc.h mep-opc.h \
 	microblaze-opc.h \
 	mt-desc.h mt-opc.h \
+	vc4-desc.h vc4-opc.h \
 	score-opc.h \
 	sh-opc.h \
 	sysdep.h \
@@ -212,6 +213,11 @@ TARGET32_LIBOPCODES_CFILES = \
 	mt-dis.c \
 	mt-ibld.c \
 	mt-opc.c \
+	vc4-asm.c \
+	vc4-desc.c \
+	vc4-dis.c \
+	vc4-ibld.c \
+	vc4-opc.c \
 	nds32-asm.c \
 	nds32-dis.c \
 	ns32k-dis.c \
@@ -328,7 +334,7 @@ po/POTFILES.in: @MAINT@ Makefile
 
 CLEANFILES = \
 	stamp-epiphany stamp-fr30 stamp-frv stamp-ip2k stamp-iq2000 stamp-lm32 \
-	stamp-m32c stamp-m32r stamp-mep stamp-mt stamp-or1k stamp-xstormy16 \
+	stamp-m32c stamp-m32r stamp-mep stamp-mt stamp-vc4 stamp-or1k stamp-xstormy16 \
 	libopcodes.a stamp-lib
 
 
@@ -345,7 +351,7 @@ CGENDEPS = \
 	$(CGENDIR)/opc-opinst.scm \
 	cgen-asm.in cgen-dis.in cgen-ibld.in
 
-CGEN_CPUS = cris epiphany fr30 frv ip2k iq2000 lm32 m32c m32r mep mt or1k xstormy16
+CGEN_CPUS = cris epiphany fr30 frv ip2k iq2000 lm32 m32c m32r mep mt vc4 or1k xstormy16
 
 if CGEN_MAINT
 CRIS_DEPS = stamp-cris
@@ -359,6 +365,7 @@ M32C_DEPS = stamp-m32c
 M32R_DEPS = stamp-m32r
 MEP_DEPS = stamp-mep
 MT_DEPS = stamp-mt
+VC4_DEPS = stamp-vc4
 OR1K_DEPS = stamp-or1k
 XSTORMY16_DEPS = stamp-xstormy16
 else
@@ -373,6 +380,7 @@ M32C_DEPS =
 M32R_DEPS =
 MEP_DEPS =
 MT_DEPS =
+VC4_DEPS =
 OR1K_DEPS =
 XSTORMY16_DEPS =
 endif
@@ -474,6 +482,13 @@ stamp-mt: $(CGENDEPS) $(CPUDIR)/mt.cpu $(CPUDIR)/mt.opc
 	$(MAKE) run-cgen arch=mt prefix=mt options= \
 		archfile=$(CPUDIR)/mt.cpu \
 		opcfile=$(CPUDIR)/mt.opc extrafiles=
+
+$(srcdir)/vc4-desc.h $(srcdir)/vc4-desc.c $(srcdir)/vc4-opc.h $(srcdir)/vc4-opc.c $(srcdir)/vc4-ibld.c $(srcdir)/vc4-asm.c $(srcdir)/vc4-dis.c: $(VC4_DEPS)
+	@true
+stamp-vc4: $(CGENDEPS) $(CPUDIR)/vc4.cpu $(CPUDIR)/vc4-vector.cpu $(CPUDIR)/vc4.opc
+	$(MAKE) run-cgen arch=vc4 prefix=vc4 options= \
+		archfile=$(CPUDIR)/vc4.cpu \
+		opcfile=$(CPUDIR)/vc4.opc extrafiles=
 
 $(srcdir)/or1k-desc.h $(srcdir)/or1k-desc.c $(srcdir)/or1k-opc.h $(srcdir)/or1k-opc.c $(srcdir)/or1k-ibld.c $(srcdir)/or1k-opinst.c $(srcdir)/or1k-asm.c $(srcdir)/or1k-dis.c: $(OR1K_DEPS)
 	@true
