@@ -140,6 +140,7 @@
 #include "elf/mn10300.h"
 #include "elf/moxie.h"
 #include "elf/mt.h"
+#include "elf/vc4.h"
 #include "elf/msp430.h"
 #include "elf/nds32.h"
 #include "elf/nfp.h"
@@ -2610,6 +2611,10 @@ dump_relocations (Filedata *          filedata,
 
 	case EM_MT:
 	  rtype = elf_mt_reloc_type (type);
+	  break;
+
+	case EM_VIDEOCORE3:
+	  rtype = elf_vc4_reloc_type (type);
 	  break;
 
 	case EM_BLACKFIN:
@@ -15959,6 +15964,8 @@ is_32bit_abs_reloc (Filedata * filedata, unsigned int reloc_type)
       return reloc_type == 1; /* R_860_32.  */
     case EM_960:
       return reloc_type == 2; /* R_960_32.  */
+    case EM_VIDEOCORE3:
+      return reloc_type == 23; /* R_VC4_32.  */
     case EM_AARCH64:
       return (reloc_type == 258
 	      || reloc_type == 1); /* R_AARCH64_ABS32 || R_AARCH64_P32_ABS32 */

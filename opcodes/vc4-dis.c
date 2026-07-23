@@ -1430,7 +1430,20 @@ print_insn_vc4 (bfd_vma pc, disassemble_info *info)
     cgen_bitset_add (isa, CGEN_COMPUTE_ISA (info));
   }
 #else
-  isa = info->private_data;
+  /* VC4 has a single ISA.  Use a private static bitset for it rather than
+     info->private_data, which the VC4 disassembler reuses for its own
+     switch-table decode state (vc4_private_data).  The upstream template
+     read info->insn_sets here, but that field was removed from
+     disassemble_info.  */
+  {
+    static CGEN_BITSET *vc4_isa_bitset;
+    if (vc4_isa_bitset == NULL)
+      {
+	vc4_isa_bitset = cgen_bitset_create (ISA_MAX);
+	cgen_bitset_set (vc4_isa_bitset, ISA_VC4);
+      }
+    isa = vc4_isa_bitset;
+  }
 #endif
 
   /* If we've switched cpu's, try to find a handle we've used before */

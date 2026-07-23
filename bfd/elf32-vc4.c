@@ -46,7 +46,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* This reloc does nothing.  */
   HOWTO (R_VC4_NONE,	/* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 32,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -61,7 +61,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 7 bit relocation.  */
   HOWTO (R_VC4_PCREL7_MUL2,	/* type */
 	 1,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
+	 2,			/* size (bytes) */
 	 7,			/* bitsize */
 	 true,			/* pc_relative */
 	 0,			/* bitpos */
@@ -76,7 +76,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 8 bit relocation.  */
   HOWTO (R_VC4_PCREL8_MUL2,      /* type */
 	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 8,			/* bitsize */
 	 true,			/* pc_relative */
 	 16,			/* bitpos */
@@ -91,7 +91,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 10 bit relocation.  */
   HOWTO (R_VC4_PCREL10_MUL2,   /* type */
 	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 10,			/* bitsize */
 	 true,			/* pc_relative */
 	 0,			/* bitpos */
@@ -106,7 +106,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 16 bit relocation.  */
   HOWTO (R_VC4_PCREL16,         /* type */
 	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
+	 2,			/* size (bytes) */
 	 16,			/* bitsize */
 	 true,			/* pc_relative */
 	 16,			/* bitpos */
@@ -121,7 +121,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 23 bit relocation.  */
   HOWTO (R_VC4_PCREL23_MUL2,    /* type */
 	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 23,			/* bitsize */
 	 true,			/* pc_relative */
 	 0,			/* bitpos */
@@ -136,7 +136,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 27 bit relocation.  */
   HOWTO (R_VC4_PCREL27,        /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 27,			/* bitsize */
 	 true,			/* pc_relative */
 	 0,			/* bitpos */
@@ -151,7 +151,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 27 bit relocation.  */
   HOWTO (R_VC4_PCREL27_MUL2,   /* type */
 	 1,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 27,			/* bitsize */
 	 true,			/* pc_relative */
 	 0,			/* bitpos */
@@ -166,7 +166,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A PC relative 32 bit relocation.  */
   HOWTO (R_VC4_PCREL32,        /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 32,			/* bitsize */
 	 true,			/* pc_relative */
 	 0,			/* bitpos */
@@ -181,7 +181,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 5 bit relocation.  */
   HOWTO (R_VC4_IMM5_MUL4,       /* type */
 	 2,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 5,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -196,7 +196,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 5 bit relocation.  */
   HOWTO (R_VC4_IMM5_1,          /* type */
 	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
+	 1,			/* size (bytes) */
 	 5,			/* bitsize */
 	 false,			/* pc_relative */
 	 4,			/* bitpos */
@@ -211,7 +211,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 5 bit relocation.  */
   HOWTO (R_VC4_IMM5_2,         /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 5,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -226,7 +226,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 6 bit relocation.  */
   HOWTO (R_VC4_IMM6,           /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 6,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -241,7 +241,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 6 bit relocation.  */
   HOWTO (R_VC4_IMM6_MUL4,      /* type */
 	 2,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 6,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -256,7 +256,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 11 bit relocation.  */
   HOWTO (R_VC4_IMM11,          /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 11,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -271,7 +271,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 12 bit relocation.  */
   HOWTO (R_VC4_IMM12,          /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 12,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -286,7 +286,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 16 bit relocation.  */
   HOWTO (R_VC4_IMM16,           /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 16,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -301,7 +301,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 23 bit relocation.  */
   HOWTO (R_VC4_IMM23,           /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 23,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -316,7 +316,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 27 bit relocation.  */
   HOWTO (R_VC4_IMM27,           /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 27,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -331,7 +331,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 32 bit relocation.  */
   HOWTO (R_VC4_IMM32,           /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 32,			/* bitsize */
 	 false,			/* pc_relative */
 	 16,			/* bitpos */
@@ -346,7 +346,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 32 bit relocation.  */
   HOWTO (R_VC4_IMM32_2,         /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 32,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -361,7 +361,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 8 bit relocation.  */
   HOWTO (R_VC4_8,               /* type */
 	 0,			/* rightshift */
-	 0,			/* size (0 = byte, 1 = short, 2 = long) */
+	 1,			/* size (bytes) */
 	 8,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -376,7 +376,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 16 bit relocation.  */
   HOWTO (R_VC4_16,              /* type */
 	 0,			/* rightshift */
-	 1,			/* size (0 = byte, 1 = short, 2 = long) */
+	 2,			/* size (bytes) */
 	 16,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
@@ -391,7 +391,7 @@ static reloc_howto_type vc4_elf_howto_table[] =
   /* A absolute 32 bit relocation.  */
   HOWTO (R_VC4_32,              /* type */
 	 0,			/* rightshift */
-	 2,			/* size (0 = byte, 1 = short, 2 = long) */
+	 4,			/* size (bytes) */
 	 32,			/* bitsize */
 	 false,			/* pc_relative */
 	 0,			/* bitpos */
