@@ -91,11 +91,16 @@ vc4_print_insn (CGEN_CPU_DESC cd, bfd_vma pc, disassemble_info *info)
 
   info->bytes_per_line = buflen = maxlen;
 
+  /* Read as much as we can, retrying with a smaller length if the read
+     fails near the end of the available window.  Step down by 1 (not 2) so
+     a single trailing byte can still be read -- modern objdump caps the
+     disassembly window at the next symbol, which can leave just one byte
+     for the final entry of a 1-byte switch table.  */
   do
     {
       memset (buf, 0, 10);
       status = (*info->read_memory_func) (pc, buf, buflen, info);
-      buflen -= 2;
+      buflen -= 1;
     }
   while (status != 0 && buflen > 0);
 
