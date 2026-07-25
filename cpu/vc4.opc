@@ -15,6 +15,13 @@
 
 #define CGEN_VERBOSE_ASSEMBLER_ERRORS
 
+/* VC4 has a single ISA.  Compute it here rather than letting cgen-dis.in
+   fall back to "isa = info->private_data": the VC4 disassembler uses
+   private_data for its own switch-table decode state (vc4_private_data),
+   so that fallback would alias the ISA bitset onto unrelated memory.
+   Defining this makes the template use its private static bitset instead.  */
+#define CGEN_COMPUTE_ISA(info) ISA_VC4
+
 typedef enum
 {
   H,
@@ -321,7 +328,7 @@ parse_shlN (CGEN_CPU_DESC cd, const char **strp,
             unsigned long shift)
 {
   const char *scan = *strp;
-  bfd_boolean is_multiply = FALSE;
+  bool is_multiply = false;
   const char *errmsg;
   unsigned long uval;
 
@@ -336,7 +343,7 @@ parse_shlN (CGEN_CPU_DESC cd, const char **strp,
   else if (strncmp (scan, "*", 1) == 0)
     {
       scan++;
-      is_multiply = TRUE;
+      is_multiply = true;
     }
   else
     return "no left shift";
@@ -380,14 +387,14 @@ PARSE_SHLN(8)
 static const char *
 parse_unsigned_int_maybe_postinc (CGEN_CPU_DESC cd, const char **strp,
                                   int opindex, unsigned long *valuep,
-                                  bfd_boolean *postinc_p)
+                                  bool *postinc_p)
 {
   int nesting = 0;
   char *ptr = (char *) *strp;
   char *term = 0, saved_char;
   const char *errmsg;
 
-  *postinc_p = FALSE;
+  *postinc_p = false;
 
   while (*ptr != 0)
     {
@@ -423,7 +430,7 @@ parse_unsigned_int_maybe_postinc (CGEN_CPU_DESC cd, const char **strp,
   if ((*strp)[0] == '+' && (*strp)[1] == '+')
     {
       (*strp) += 2;
-      *postinc_p = TRUE;
+      *postinc_p = true;
     }
 
   return 0;
@@ -432,14 +439,14 @@ parse_unsigned_int_maybe_postinc (CGEN_CPU_DESC cd, const char **strp,
 static const char *
 parse_signed_int_maybe_postmod (CGEN_CPU_DESC cd, const char **strp,
                                 int opindex, long *valuep,
-                                bfd_boolean *postmod_p)
+                                bool *postmod_p)
 {
   int nesting = 0;
   char *ptr = (char *) *strp;
   char *term = 0, saved_char;
   const char *errmsg;
 
-  *postmod_p = FALSE;
+  *postmod_p = false;
 
   while (*ptr != 0)
     {
@@ -473,7 +480,7 @@ parse_signed_int_maybe_postmod (CGEN_CPU_DESC cd, const char **strp,
   if ((*strp)[0] == '+' && (*strp)[1] == '=')
     {
       (*strp) += 2;
-      *postmod_p = TRUE;
+      *postmod_p = true;
     }
 
   return 0;
@@ -522,18 +529,18 @@ parse_vc4_reg (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 static const char *
 parse_vector_reg (CGEN_CPU_DESC cd, const char **strp, int opindex,
                   unsigned long *valuep, vc4_operand whichop,
-                  bfd_boolean extended)
+                  bool extended)
 {
   const char *ptr = *strp;
   vc4_vec_dir vec_dir;
   unsigned long y, x;
   const char *errmsg;
   unsigned long valbits = 0;
-  bfd_boolean do_inc = FALSE;
-  bfd_boolean column_offset = FALSE;
-  bfd_boolean inc_here;
+  bool do_inc = false;
+  bool column_offset = false;
+  bool inc_here;
   unsigned scalar_reg = 15;
-  bfd_boolean areg_p = (whichop == OP_A) && extended;
+  bool areg_p = (whichop == OP_A) && extended;
 
   if ((ptr[0] == 'H' && ptr[1] == 'X')
       || (ptr[0] == 'H' && ptr[1] == '1' && ptr[2] == '6'))
@@ -626,7 +633,7 @@ parse_vector_reg (CGEN_CPU_DESC cd, const char **strp, int opindex,
   if (extended && *ptr == '*')
     {
       ptr++;
-      column_offset = TRUE;
+      column_offset = true;
     }
 
   if (x > 63)
@@ -743,21 +750,21 @@ static const char *
 parse_vec80aludreg (CGEN_CPU_DESC cd, const char **strp, int opindex,
                     unsigned long *valuep)
 {
-  return parse_vector_reg (cd, strp, opindex, valuep, OP_D, TRUE);
+  return parse_vector_reg (cd, strp, opindex, valuep, OP_D, true);
 }
 
 static const char *
 parse_vec80aluareg (CGEN_CPU_DESC cd, const char **strp, int opindex,
                     unsigned long *valuep)
 {
-  return parse_vector_reg (cd, strp, opindex, valuep, OP_A, TRUE);
+  return parse_vector_reg (cd, strp, opindex, valuep, OP_A, true);
 }
 
 static const char *
 parse_vec80alubreg (CGEN_CPU_DESC cd, const char **strp, int opindex,
                     unsigned long *valuep)
 {
-  return parse_vector_reg (cd, strp, opindex, valuep, OP_B, TRUE);
+  return parse_vector_reg (cd, strp, opindex, valuep, OP_B, true);
 }
 
 static int
@@ -807,9 +814,9 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
   unsigned long repeat = 0;
   unsigned long acc_sru = 0;
   unsigned long predication = 0;
-  bfd_boolean setf = FALSE;
-  bfd_boolean sru_p = FALSE;
-  bfd_boolean acc_p = FALSE;
+  bool setf = false;
+  bool sru_p = false;
+  bool acc_p = false;
 
   while (**strp != 0)
     {
@@ -841,7 +848,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
         }
       else if (strncmp (*strp, "SETF", 4) == 0)
         {
-          setf = TRUE;
+          setf = true;
           (*strp) += 4;
         }
       else if (strncmp (*strp, "ALL", 3) == 0)
@@ -890,7 +897,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (sru_p)
             return "can't have ENA with SRU";
           acc_sru |= ENA_BIT;
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 3;
         }
       else if (strncmp (*strp, "HIGH", 4) == 0)
@@ -898,7 +905,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (sru_p)
             return "can't have HIGH with SRU";
           acc_sru |= HIGH_BIT;
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 4;
         }
       else if (strncmp (*strp, "SIGN", 4) == 0)
@@ -906,7 +913,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (sru_p)
             return "can't have SIGN with SRU";
           acc_sru |= SIGN_BIT;
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 4;
         }
       else if (strncmp (*strp, "CLRA", 4) == 0)
@@ -914,7 +921,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (sru_p)
             return "can't have CLRA with SRU";
           acc_sru |= CLRA_BIT;
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 4;
         }
       else if (strncmp (*strp, "WBA", 3) == 0)
@@ -922,7 +929,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (sru_p)
             return "can't have WBA with SRU";
           acc_sru |= WBA_BIT;
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 3;
         }
       else if (strncmp (*strp, "SUB", 3) == 0)
@@ -930,7 +937,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (sru_p)
             return "can't have SUB with SRU";
           acc_sru |= SUB_BIT;
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 3;
         }
       else if (**strp
@@ -951,7 +958,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
               acc_sru |= HIGH_BIT;
               (*strp)++;
             }
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 4;
         }
       else if (**strp
@@ -972,7 +979,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
               acc_sru |= HIGH_BIT;
               (*strp)++;
             }
-          acc_p = TRUE;
+          acc_p = true;
           (*strp) += 4;
         }
       else if (strncmp (*strp, "SUMS", 4) == 0
@@ -987,7 +994,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           if (parse_scalar_reg_update (strp, &acc_sru, opcode))
             return "error parsing scalar update reg";
 
-          sru_p = TRUE;
+          sru_p = true;
         }
       else if (strncmp (*strp, "IMIN", 4) == 0)
         {
@@ -996,7 +1003,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           (*strp) += 4;
           if (parse_scalar_reg_update (strp, &acc_sru, 3))
             return "error parsing scalar update reg";
-          sru_p = TRUE;
+          sru_p = true;
         }
       else if (strncmp (*strp, "IMAX", 4) == 0)
         {
@@ -1005,7 +1012,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           (*strp) += 4;
           if (parse_scalar_reg_update (strp, &acc_sru, 5))
             return "error parsing scalar update reg";
-          sru_p = TRUE;
+          sru_p = true;
         }
       else if (strncmp (*strp, "MAX", 3) == 0)
         {
@@ -1014,7 +1021,7 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
           (*strp) += 3;
           if (parse_scalar_reg_update (strp, &acc_sru, 7))
             return "error parsing scalar update reg";
-          sru_p = TRUE;
+          sru_p = true;
         }
       else
         return "unexpected modifier";
@@ -1092,7 +1099,7 @@ parse_ld_st_addr (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 {
   unsigned rs, rad = 15;
   long offset = 0;
-  bfd_boolean postmod = FALSE;
+  bool postmod = false;
   const char *errmsg;
 
   errmsg = parse_vc4_reg (cd, strp, opindex, &rs, 15);
@@ -1110,7 +1117,7 @@ parse_ld_st_addr (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
   else if ((*strp)[0] == '+' && (*strp)[1] == '=')
     {
       (*strp) += 2;
-      postmod = TRUE;
+      postmod = true;
     }
 
   if (postmod)
@@ -1195,7 +1202,7 @@ parse_vec48hvec (CGEN_CPU_DESC cd, const char **strp, int opindex,
                  unsigned long *valuep, vc4_operand whichop)
 {
   const char *errmsg = parse_vector_reg (cd, strp, opindex, valuep, whichop,
-                                         FALSE);
+                                         false);
 
   if (errmsg)
     return errmsg;
@@ -1214,7 +1221,7 @@ parse_vec48vvec (CGEN_CPU_DESC cd, const char **strp, int opindex,
                  unsigned long *valuep, vc4_operand whichop)
 {
   const char *errmsg = parse_vector_reg (cd, strp, opindex, valuep, whichop,
-                                         FALSE);
+                                         false);
 
   if (errmsg)
     return errmsg;
@@ -1308,18 +1315,23 @@ vc4_print_insn (CGEN_CPU_DESC cd, bfd_vma pc, disassemble_info *info)
   int status;
   int insn;
   vc4_private_data *vc4_data = info->private_data;
-  bfd_boolean symbol_here = (*info->symbol_at_address_func) (pc, info);
+  bool symbol_here = (*info->symbol_at_address_func) (pc, info);
 
   if (info->private_data == NULL)
     vc4_data = info->private_data = calloc (sizeof (vc4_private_data), 1);
 
   info->bytes_per_line = buflen = maxlen;
 
+  /* Read as much as we can, retrying with a smaller length if the read
+     fails near the end of the available window.  Step down by 1 (not 2) so
+     a single trailing byte can still be read -- modern objdump caps the
+     disassembly window at the next symbol, which can leave just one byte
+     for the final entry of a 1-byte switch table.  */
   do
     {
       memset (buf, 0, 10);
       status = (*info->read_memory_func) (pc, buf, buflen, info);
-      buflen -= 2;
+      buflen -= 1;
     }
   while (status != 0 && buflen > 0);
 
@@ -1417,11 +1429,11 @@ print_vector_reg (void *dis_info, unsigned long value, vc4_operand whichop)
 {
   vc4_vec_dir vec_dir;
   unsigned x, y;
-  bfd_boolean do_inc, column_offset;
+  bool do_inc, column_offset;
   unsigned scalar_reg;
   disassemble_info *info = (disassemble_info *) dis_info;
   const char *typename;
-  bfd_boolean areg_p = whichop == OP_A;
+  bool areg_p = whichop == OP_A;
 
   switch ((value >> 6) & 15)
     {
@@ -1591,7 +1603,7 @@ print_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 {
   disassemble_info *info = (disassemble_info *) dis_info;
   unsigned long repeat = value & 7;
-  bfd_boolean setf = (value >> 3) & 1;
+  bool setf = (value >> 3) & 1;
   unsigned long predication = (value >> 4) & 7;
   unsigned long acc_sru = (value >> 7) & 127;
   const char *rep_str = "", *pred_str = "";
