@@ -257,6 +257,38 @@ print_insn (CGEN_CPU_DESC cd,
       if ((insn_value_cropped & CGEN_INSN_BASE_MASK (insn))
 	  == CGEN_INSN_BASE_VALUE (insn))
 	{
+#ifdef CGEN_MAX_EXTRA_OPCODE_OPERANDS
+	  unsigned int i, extra_field;
+	  unsigned int limit_bits = (CGEN_MAX_EXTRA_OPCODE_OPERANDS + 1)
+				    * cd->base_insn_bitsize;
+
+	  if (limit_bits > (unsigned int) CGEN_INSN_BITSIZE (insn))
+	    limit_bits = (unsigned int) CGEN_INSN_BITSIZE (insn);
+
+	  /* Reject insns with opcode bits (constant ifields) beyond the base
+	     insn that do not match the current insn in the list.  */
+	  for (i = cd->base_insn_bitsize, extra_field = 0;
+	       i < limit_bits;
+	       i += cd->base_insn_bitsize, extra_field++)
+	    {
+	      bfd_byte extrabuf[CGEN_MAX_INSN_SIZE];
+	      unsigned long bits;
+	      int buflen = cd->base_insn_bitsize / 8;
+
+	      /* If we can't read that far the bits are unverifiable, so stop
+		 checking rather than reject a candidate we cannot rule out.  */
+	      if ((*info->read_memory_func) (pc + i / 8, extrabuf, buflen, info) != 0)
+		break;
+
+	      bits = bfd_get_bits (extrabuf, cd->base_insn_bitsize,
+				   info->endian == BFD_ENDIAN_BIG);
+
+	      if ((bits & CGEN_INSN_IFIELD_MASK (insn, extra_field))
+		  != CGEN_INSN_IFIELD_VALUE (insn, extra_field))
+		goto next_insn;
+	    }
+#endif /* CGEN_MAX_EXTRA_OPCODE_OPERANDS */
+
 	  /* Printing is handled in two passes.  The first pass parses the
 	     machine insn and extracts the fields.  The second pass prints
 	     them.  */
@@ -290,6 +322,9 @@ print_insn (CGEN_CPU_DESC cd,
 	    }
 	}
 
+#ifdef CGEN_MAX_EXTRA_OPCODE_OPERANDS
+    next_insn:
+#endif
       insn_list = CGEN_DIS_NEXT_INSN (insn_list);
     }
 
