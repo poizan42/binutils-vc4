@@ -105,11 +105,25 @@
    GETACC MEM25 MEM26 MEM27 MEM28 MEM29 MEM30 MEM31)
 )
 
+; LD/LOOKUPM/LOOKUPML and ST/INDEXWRITEM/INDEXWRITEML were originally commented out
+; here, leaving them with only the restricted vld48insn/vst48insn (and 80-bit
+; vldinsn/vstinsn) forms. Those pin the *inert* operand's 9-bit specifier to one exact
+; value -- A for loads, D for stores -- and offer scalar-B addressing only, so every
+; other encoding of these six ops fell through to vec48/vec80. That was the entire
+; group-60 gap: 5788/5788 undecoded in VC4 firmware, 979/979 in VC6.
+;
+; Hardware probing (see vpu-probe/findings-op60.md) confirms the inert operand really is
+; ignored -- all 9 specifier bits plus its auto-increment -- while f-op41-39 and f-op42
+; select genuinely different addressing forms. Including these ops here gives them the
+; general forms the rest of the family already has, in which every specifier bit is free
+; and "absent" is just the value the print handler renders as "-".
+;
+; GETACC stays commented out: it has its own dedicated general pmacros below.
 (define-pmacro genmemops
   (
-   ;LD LOOKUPM LOOKUPML
+   LD LOOKUPM LOOKUPML
    MEM03
-   ;ST INDEXWRITEM INDEXWRITEML
+   ST INDEXWRITEM INDEXWRITEML
    MEM07
    MEMREAD MEMWRITE MEM10 MEM11 MEM12 MEM13 MEM14 MEM15
    MEM16 MEM17 MEM18 MEM19 MEM20 MEM21 MEM22 MEM23
