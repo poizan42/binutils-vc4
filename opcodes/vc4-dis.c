@@ -1,11 +1,11 @@
+/* DO NOT EDIT!  -*- buffer-read-only: t -*- vi:set ro:  */
 /* Disassembler interface for targets using CGEN. -*- C -*-
    CGEN: Cpu tools GENerator
 
    THIS FILE IS MACHINE GENERATED WITH CGEN.
    - the resultant file is machine generated, cgen-dis.in isn't
 
-   Copyright 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2005, 2007,
-   2008, 2010  Free Software Foundation, Inc.
+   Copyright (C) 1996-2026 Free Software Foundation, Inc.
 
    This file is part of libopcodes.
 
@@ -29,7 +29,7 @@
 #include "sysdep.h"
 #include <stdio.h>
 #include "ansidecl.h"
-#include "dis-asm.h"
+#include "disassemble.h"
 #include "bfd.h"
 #include "symcat.h"
 #include "libiberty.h"
@@ -1050,13 +1050,14 @@ vc4_cgen_print_operand (CGEN_CPU_DESC cd,
 
     default :
       /* xgettext:c-format */
-      fprintf (stderr, _("Unrecognized field %d while printing insn.\n"),
-	       opindex);
-    abort ();
+      opcodes_error_handler
+	(_("internal error: unrecognized field %d while printing insn"),
+	 opindex);
+      abort ();
   }
 }
 
-cgen_print_fn * const vc4_cgen_print_handlers[] = 
+cgen_print_fn * const vc4_cgen_print_handlers[] =
 {
   print_insn_normal,
 };
@@ -1246,7 +1247,7 @@ print_insn (CGEN_CPU_DESC cd,
       int length;
       unsigned long insn_value_cropped;
 
-#ifdef CGEN_VALIDATE_INSN_SUPPORTED 
+#ifdef CGEN_VALIDATE_INSN_SUPPORTED
       /* Not needed as insn shouldn't be in hash lists if not supported.  */
       /* Supported by this cpu?  */
       if (! vc4_cgen_insn_supported (cd, insn))
@@ -1264,7 +1265,7 @@ print_insn (CGEN_CPU_DESC cd,
          relevant part from the buffer. */
       if ((unsigned) (CGEN_INSN_BITSIZE (insn) / 8) < buflen &&
 	  (unsigned) (CGEN_INSN_BITSIZE (insn) / 8) <= sizeof (unsigned long))
-	insn_value_cropped = bfd_get_bits (buf, CGEN_INSN_BITSIZE (insn), 
+	insn_value_cropped = bfd_get_bits (buf, CGEN_INSN_BITSIZE (insn),
 					   info->endian == BFD_ENDIAN_BIG);
       else
 	insn_value_cropped = insn_value;
@@ -1274,11 +1275,11 @@ print_insn (CGEN_CPU_DESC cd,
 	{
 #ifdef CGEN_MAX_EXTRA_OPCODE_OPERANDS
 	  unsigned int i, extra_field;
-          unsigned int limit_bits = (CGEN_MAX_EXTRA_OPCODE_OPERANDS + 1)
-                                    * cd->base_insn_bitsize;
+	  unsigned int limit_bits = (CGEN_MAX_EXTRA_OPCODE_OPERANDS + 1)
+				    * cd->base_insn_bitsize;
 
-          if (limit_bits > (unsigned int) CGEN_INSN_BITSIZE (insn))
-            limit_bits = (unsigned int) CGEN_INSN_BITSIZE (insn);
+	  if (limit_bits > (unsigned int) CGEN_INSN_BITSIZE (insn))
+	    limit_bits = (unsigned int) CGEN_INSN_BITSIZE (insn);
 
 	  /* Reject insns with opcode bits (constant ifields) beyond the base
 	     insn that do not match the current insn in the list.  */
@@ -1288,11 +1289,12 @@ print_insn (CGEN_CPU_DESC cd,
 	    {
 	      bfd_byte extrabuf[CGEN_MAX_INSN_SIZE];
 	      unsigned long bits;
-	      int status, buflen;
+	      int buflen = cd->base_insn_bitsize / 8;
 
-	      buflen = cd->base_insn_bitsize / 8;
-	      status = (*info->read_memory_func) (pc + i / 8, extrabuf, buflen,
-						  info);
+	      /* If we can't read that far the bits are unverifiable, so stop
+		 checking rather than reject a candidate we cannot rule out.  */
+	      if ((*info->read_memory_func) (pc + i / 8, extrabuf, buflen, info) != 0)
+		break;
 
 	      bits = bfd_get_bits (extrabuf, cd->base_insn_bitsize,
 				   info->endian == BFD_ENDIAN_BIG);
@@ -1301,7 +1303,7 @@ print_insn (CGEN_CPU_DESC cd,
 		  != CGEN_INSN_IFIELD_VALUE (insn, extra_field))
 		goto next_insn;
 	    }
-#endif /* ! CGEN_MAX_EXTRA_OPCODE_OPERANDS */
+#endif /* CGEN_MAX_EXTRA_OPCODE_OPERANDS */
 
 	  /* Printing is handled in two passes.  The first pass parses the
 	     machine insn and extracts the fields.  The second pass prints
@@ -1336,7 +1338,9 @@ print_insn (CGEN_CPU_DESC cd,
 	    }
 	}
 
+#ifdef CGEN_MAX_EXTRA_OPCODE_OPERANDS
     next_insn:
+#endif
       insn_list = CGEN_DIS_NEXT_INSN (insn_list);
     }
 
@@ -1388,6 +1392,7 @@ typedef struct cpu_desc_list
   CGEN_BITSET *isa;
   int mach;
   int endian;
+  int insn_endian;
   CGEN_CPU_DESC cd;
 } cpu_desc_list;
 
@@ -1400,12 +1405,16 @@ print_insn_vc4 (bfd_vma pc, disassemble_info *info)
   static CGEN_BITSET *prev_isa;
   static int prev_mach;
   static int prev_endian;
+  static int prev_insn_endian;
   int length;
   CGEN_BITSET *isa;
   int mach;
   int endian = (info->endian == BFD_ENDIAN_BIG
 		? CGEN_ENDIAN_BIG
 		: CGEN_ENDIAN_LITTLE);
+  int insn_endian = (info->endian_code == BFD_ENDIAN_BIG
+                     ? CGEN_ENDIAN_BIG
+                     : CGEN_ENDIAN_LITTLE);
   enum bfd_architecture arch;
 
   /* ??? gdb will set mach but leave the architecture as "unknown" */
@@ -1415,7 +1424,7 @@ print_insn_vc4 (bfd_vma pc, disassemble_info *info)
   arch = info->arch;
   if (arch == bfd_arch_unknown)
     arch = CGEN_BFD_ARCH;
-   
+
   /* There's no standard way to compute the machine or isa number
      so we leave it to the target.  */
 #ifdef CGEN_COMPUTE_MACH
@@ -1435,20 +1444,7 @@ print_insn_vc4 (bfd_vma pc, disassemble_info *info)
     cgen_bitset_add (isa, CGEN_COMPUTE_ISA (info));
   }
 #else
-  /* VC4 has a single ISA.  Use a private static bitset for it rather than
-     info->private_data, which the VC4 disassembler reuses for its own
-     switch-table decode state (vc4_private_data).  The upstream template
-     read info->insn_sets here, but that field was removed from
-     disassemble_info.  */
-  {
-    static CGEN_BITSET *vc4_isa_bitset;
-    if (vc4_isa_bitset == NULL)
-      {
-	vc4_isa_bitset = cgen_bitset_create (ISA_MAX);
-	cgen_bitset_set (vc4_isa_bitset, ISA_VC4);
-      }
-    isa = vc4_isa_bitset;
-  }
+  isa = info->private_data;
 #endif
 
   /* If we've switched cpu's, try to find a handle we've used before */
@@ -1469,7 +1465,7 @@ print_insn_vc4 (bfd_vma pc, disassemble_info *info)
 	      break;
 	    }
 	}
-    } 
+    }
 
   /* If we haven't initialized yet, initialize the opcode table.  */
   if (! cd)
@@ -1484,9 +1480,11 @@ print_insn_vc4 (bfd_vma pc, disassemble_info *info)
       prev_isa = cgen_bitset_copy (isa);
       prev_mach = mach;
       prev_endian = endian;
+      prev_insn_endian = insn_endian;
       cd = vc4_cgen_cpu_open (CGEN_CPU_OPEN_ISAS, prev_isa,
 				 CGEN_CPU_OPEN_BFDMACH, mach_name,
 				 CGEN_CPU_OPEN_ENDIAN, prev_endian,
+                                 CGEN_CPU_OPEN_INSN_ENDIAN, prev_insn_endian,
 				 CGEN_CPU_OPEN_END);
       if (!cd)
 	abort ();

@@ -1,8 +1,9 @@
+/* DO NOT EDIT!  -*- buffer-read-only: t -*- vi:set ro:  */
 /* Instruction opcode header for vc4.
 
 THIS FILE IS MACHINE GENERATED WITH CGEN.
 
-Copyright 1996-2010 Free Software Foundation, Inc.
+Copyright (C) 1996-2026 Free Software Foundation, Inc.
 
 This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 
@@ -25,6 +26,10 @@ This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 #ifndef VC4_OPC_H
 #define VC4_OPC_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* -- opc.h */
 
 /* Most bits in the first word are variable, but we can at least hash on
@@ -41,6 +46,13 @@ This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 #define CGEN_ASM_HASH_SIZE 5
 
 #define CGEN_VERBOSE_ASSEMBLER_ERRORS
+
+/* VC4 has a single ISA.  Compute it here rather than letting cgen-dis.in
+   fall back to "isa = info->private_data": the VC4 disassembler uses
+   private_data for its own switch-table decode state (vc4_private_data),
+   so that fallback would alias the ISA bitset onto unrelated memory.
+   Defining this makes the template use its private static bitset instead.  */
+#define CGEN_COMPUTE_ISA(info) ISA_VC4
 
 typedef enum
 {
@@ -2900,5 +2912,9 @@ struct cgen_fields
 {\
 }
 
+
+   #ifdef __cplusplus
+   }
+   #endif
 
 #endif /* VC4_OPC_H */

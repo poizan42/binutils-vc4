@@ -1,8 +1,9 @@
+/* DO NOT EDIT!  -*- buffer-read-only: t -*- vi:set ro:  */
 /* Instruction opcode table for vc4.
 
 THIS FILE IS MACHINE GENERATED WITH CGEN.
 
-Copyright 1996-2010 Free Software Foundation, Inc.
+Copyright (C) 1996-2026 Free Software Foundation, Inc.
 
 This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 
@@ -65489,67 +65490,67 @@ static const CGEN_IFMT ifmt_ldsboff12_nosuf ATTRIBUTE_UNUSED = {
 };
 
 static const CGEN_IFMT ifmt_ldoffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_stoffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldhoffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_sthoffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldboffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_stboffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldshoffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldsboffzero ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldoffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_stoffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldhoffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_sthoffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldboffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_stboffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldshoffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldsboffzero_nosuf ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OP8) }, { F (F_OP26_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_9) }, { F (F_OP7_5) }, { F (F_OP4_0) }, { F (F_OP31_27) }, { F (F_OFFSET12) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_ldoff16_nosuf ATTRIBUTE_UNUSED = {
@@ -69992,15 +69993,13 @@ static const CGEN_OPCODE vc4_cgen_macro_insn_opcode_table[] =
    Targets are free to override CGEN_{ASM,DIS}_HASH_P in the .opc file.  */
 
 static int
-asm_hash_insn_p (insn)
-     const CGEN_INSN *insn ATTRIBUTE_UNUSED;
+asm_hash_insn_p (const CGEN_INSN *insn ATTRIBUTE_UNUSED)
 {
   return CGEN_ASM_HASH_P (insn);
 }
 
 static int
-dis_hash_insn_p (insn)
-     const CGEN_INSN *insn;
+dis_hash_insn_p (const CGEN_INSN *insn)
 {
   /* If building the hash table and the NO-DIS attribute is present,
      ignore.  */
@@ -70032,8 +70031,7 @@ dis_hash_insn_p (insn)
    Targets are free to override CGEN_{ASM,DIS}_HASH in the .opc file.  */
 
 static unsigned int
-asm_hash_insn (mnem)
-     const char * mnem;
+asm_hash_insn (const char *mnem)
 {
   return CGEN_ASM_HASH (mnem);
 }
@@ -70042,9 +70040,8 @@ asm_hash_insn (mnem)
    VALUE is the first base_insn_bitsize bits as an int in host order.  */
 
 static unsigned int
-dis_hash_insn (buf, value)
-     const char * buf ATTRIBUTE_UNUSED;
-     CGEN_INSN_INT value ATTRIBUTE_UNUSED;
+dis_hash_insn (const char *buf ATTRIBUTE_UNUSED,
+		     CGEN_INSN_INT value ATTRIBUTE_UNUSED)
 {
   return CGEN_DIS_HASH (buf, value);
 }

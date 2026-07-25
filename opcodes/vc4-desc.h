@@ -1,8 +1,9 @@
+/* DO NOT EDIT!  -*- buffer-read-only: t -*- vi:set ro:  */
 /* CPU data header for vc4.
 
 THIS FILE IS MACHINE GENERATED WITH CGEN.
 
-Copyright 1996-2010 Free Software Foundation, Inc.
+Copyright (C) 1996-2026 Free Software Foundation, Inc.
 
 This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 
@@ -25,6 +26,10 @@ This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 #ifndef VC4_CPU_H
 #define VC4_CPU_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define CGEN_ARCH vc4
 
 /* Given symbol S, return vc4_cgen_<S>.  */
@@ -42,7 +47,8 @@ This file is part of the GNU Binutils and/or GDB, the GNU debugger.
 /* Maximum size of any insn (in bytes).  */
 #define CGEN_MAX_INSN_SIZE 10
 
-#define CGEN_MAX_EXTRA_OPCODE_OPERANDS 3
+/* Number of words beyond the base insn that can hold opcode bits.  */
+#define CGEN_MAX_EXTRA_OPCODE_OPERANDS 4
 
 #define CGEN_INT_INSN_P 0
 
@@ -491,5 +497,9 @@ extern CGEN_KEYWORD vc4_cgen_opval_h_eltsize;
 extern const CGEN_HW_ENTRY vc4_cgen_hw_table[];
 
 
+
+   #ifdef __cplusplus
+   }
+   #endif
 
 #endif /* VC4_CPU_H */
