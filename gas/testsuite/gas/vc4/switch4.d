@@ -13,7 +13,7 @@ Disassembly of section \.text:
    8:	01 00             	nop
    a:	01 00             	nop
    c:	01 00             	nop
-   e:	84 00             	switch r4
+   e:	84 00             	switch.b r4
 
 00000010 <\$c>:
   10:	0b                	\.case 26 <case4>

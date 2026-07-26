@@ -27,6 +27,6 @@ Disassembly of section \.text:
   24:	60 00             	bl r0
   26:	72 00             	bl r18
   28:	7f 00             	bl pc
-  2a:	82 00             	switch r2
+  2a:	82 00             	switch.b r2
   2c:	a3 00             	switch r3
   2e:	e5 00             	version r5

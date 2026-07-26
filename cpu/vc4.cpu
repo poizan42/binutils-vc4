@@ -1079,11 +1079,34 @@
   () ()
 )
 
+; `switch` is the assembler-facing mnemonic: gas starts it as the byte form and promotes it
+; to the halfword form if a `.case` target needs the range (tc-vc4.c, SWITCH_TBB/SWITCH_TBH).
+; That relaxation must keep working, so this macro keeps the plain "switch" syntax and stays
+; RELAXABLE -- but it is marked NO-DIS, because it was also winning during *disassembly* and
+; printing "switch" for both encodings. 1,398 of the 2,054 switch sites in start.elf are the
+; byte form, so 68% of them were mislabelled as the halfword form, which matters: the entry
+; width and index scaling of the inline table depend on which one it is.
+;
+; NO-DIS affects disassembly only (cgen insn.scm: "For macro insns, do not use during
+; disassembly"), so this remains fully usable for assembly.
+
 (define-normal-macro-insn
-  switchb "SWITCHB" (SWITCH RELAXABLE)
+  switchb "SWITCHB" (SWITCH RELAXABLE NO-DIS)
   "switch $alu32dreg"
   (emit tbb alu32dreg)
 )
+
+; Disassembly-visible spelling of the byte form, matching Hermitage's videocoreiv.arch:138 and
+; the Ghidra SLEIGH spec. Also assemblable, for writing the byte form explicitly.
+
+(define-normal-macro-insn
+  switchdotb "SWITCHDOTB" (SWITCH)
+  "switch.b $alu32dreg"
+  (emit tbb alu32dreg)
+)
+
+; The halfword form already prints as plain "switch", which is Hermitage's name for it, so this
+; one is left alone and remains the disassembly spelling for the tbh encoding.
 
 (define-normal-macro-insn
   switchh "SWITCHH" (SWITCH RELAXED)
