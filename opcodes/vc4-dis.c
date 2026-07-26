@@ -729,6 +729,9 @@ vc4_cgen_print_operand (CGEN_CPU_DESC cd,
     case VC4_OPERAND_ALU16SREG :
       print_keyword (cd, info, & vc4_cgen_opval_h_fastreg, fields->f_op7_4, 0);
       break;
+    case VC4_OPERAND_ALU32ABREG :
+      print_keyword (cd, info, & vc4_cgen_opval_h_reg, fields->f_alu32abreg, 0|(1<<CGEN_OPERAND_VIRTUAL));
+      break;
     case VC4_OPERAND_ALU32AREG :
       print_keyword (cd, info, & vc4_cgen_opval_h_reg, fields->f_op31_27, 0);
       break;

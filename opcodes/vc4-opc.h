@@ -3063,6 +3063,7 @@ struct cgen_fields
   long f_offset23bits;
   long f_offset27bits;
   long f_offset12;
+  long f_alu32abreg;
   long f_op15_10;
   long f_op9;
   long f_op8_3;

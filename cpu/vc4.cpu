@@ -776,6 +776,39 @@
   (handlers (parse "dummy") (print "dummy"))
 )
 
+; clamp16 and count take one source but sit in the family's three-register format, so the A
+; field is redundant -- probing on VideoCore VI shows it has no effect. Broadcom's own firmware
+; nevertheless fills it with a COPY OF THE SOURCE REGISTER, consistently: A==B at 12/12 clamp16
+; sites and 161/166 register-form sites overall, holding across VideoCore IV (start.elf) and VI
+; (start4.elf, start4x.elf). That looks like a documented convention rather than an accident, and
+; since we have no Broadcom documentation and have only ever probed VC6, the conservative thing
+; is to emit what the vendor emits rather than the zero that parse_dummy produced. Costs nothing
+; and is safe whether or not some other VideoCore implementation reads the field.
+;
+; Only the register form gets this. The 12 immediate-form sites in firmware have no consistent A
+; value, and Ghidra places none of them inside a function -- they are data, so there is nothing
+; to match.
+
+(define-multi-ifield
+  (name f-alu32abreg)
+  (comment "source register, duplicated into the redundant A field")
+  (attrs)
+  (mode UINT)
+  (subfields f-op20-16 f-op31-27)
+  (insert (sequence ()
+            (set (ifield f-op20-16) (ifield f-alu32abreg))
+            (set (ifield f-op31-27) (ifield f-alu32abreg))))
+  (extract (sequence ()
+             (set (ifield f-alu32abreg) (ifield f-op20-16))))
+)
+
+(define-normal-operand
+  alu32abreg
+  "" ()
+  h-reg
+  f-alu32abreg
+)
+
 (define-normal-operand
   alu32cond
   "" ()
@@ -2073,9 +2106,9 @@
 (define-pmacro (clmpcntr2 x-name x-opcode x-op11-8 x-op7-5)
   (define-normal-insn
     x-name (.str (.upcase x-name)) ()
-    (.str x-opcode "$alu32cond $alu32dreg$alu32missingareg,$alu32breg")
+    (.str x-opcode "$alu32cond $alu32dreg,$alu32abreg")
     (+ OPLEN_12 (f-op11-8 x-op11-8) (f-op7-5 x-op7-5) alu32dreg
-       alu32missingareg alu32cond OP22_21_0 alu32breg)
+       alu32cond OP22_21_0 alu32abreg)
     () ())
 )
 

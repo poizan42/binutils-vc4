@@ -203,7 +203,7 @@ static const CGEN_IFMT ifmt_mulhdiss ATTRIBUTE_UNUSED = {
 };
 
 static const CGEN_IFMT ifmt_clamp16r ATTRIBUTE_UNUSED = {
-  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP31_27) }, { F (F_OP11_8) }, { F (F_OP26_23) }, { F (F_OP7_5) }, { F (F_OP22_21) }, { F (F_OP4_0) }, { F (F_OP20_16) }, { 0 } }
+  16, 32, 0xffe0, { { F (F_OPLEN) }, { F (F_OP11_8) }, { F (F_OP26_23) }, { F (F_OP7_5) }, { F (F_OP22_21) }, { F (F_OP4_0) }, { F (F_ALU32ABREG) }, { 0 } }
 };
 
 static const CGEN_IFMT ifmt_adds5i ATTRIBUTE_UNUSED = {
@@ -2523,16 +2523,16 @@ static const CGEN_OPCODE vc4_cgen_insn_opcode_table[MAX_INSNS] =
     { { MNEM, OP (ALU32COND), '.', 'm', ' ', OP (ALU32DREG), ',', OP (ALU32AREG), ',', OP (ALU32BREG), OP (SHL8), 0 } },
     & ifmt_ldcndidx, { 0xc700, { 0x0 }, { 0x60 } }
   },
-/* clamp16$alu32cond $alu32dreg$alu32missingareg,$alu32breg */
+/* clamp16$alu32cond $alu32dreg,$alu32abreg */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, OP (ALU32COND), ' ', OP (ALU32DREG), OP (ALU32MISSINGAREG), ',', OP (ALU32BREG), 0 } },
+    { { MNEM, OP (ALU32COND), ' ', OP (ALU32DREG), ',', OP (ALU32ABREG), 0 } },
     & ifmt_clamp16r, { 0xc560, { 0x0 }, { 0x60 } }
   },
-/* count$alu32cond $alu32dreg$alu32missingareg,$alu32breg */
+/* count$alu32cond $alu32dreg,$alu32abreg */
   {
     { 0, 0, 0, 0 },
-    { { MNEM, OP (ALU32COND), ' ', OP (ALU32DREG), OP (ALU32MISSINGAREG), ',', OP (ALU32BREG), 0 } },
+    { { MNEM, OP (ALU32COND), ' ', OP (ALU32DREG), ',', OP (ALU32ABREG), 0 } },
     & ifmt_clamp16r, { 0xc600, { 0x0 }, { 0x60 } }
   },
 /* adds$alu32cond.m $alu32dreg,$alu32areg,$imm6 */

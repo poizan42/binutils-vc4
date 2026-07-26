@@ -1341,6 +1341,9 @@ vc4_cgen_parse_operand (CGEN_CPU_DESC cd,
     case VC4_OPERAND_ALU16SREG :
       errmsg = cgen_parse_keyword (cd, strp, & vc4_cgen_opval_h_fastreg, & fields->f_op7_4);
       break;
+    case VC4_OPERAND_ALU32ABREG :
+      errmsg = cgen_parse_keyword (cd, strp, & vc4_cgen_opval_h_reg, & fields->f_alu32abreg);
+      break;
     case VC4_OPERAND_ALU32AREG :
       errmsg = cgen_parse_keyword (cd, strp, & vc4_cgen_opval_h_reg, & fields->f_op31_27);
       break;
