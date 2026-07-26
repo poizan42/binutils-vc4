@@ -2474,6 +2474,12 @@
     (emit x-name alu48idreg alu48immu))
 )
 
+; The remark below is the original author's. Firmware disagrees: /boot/start.elf uses the
+; addscale8 form, and because this table stopped at 13 of the 32 operations the disassembler
+; did not merely fail to name it -- it consumed 2 bytes instead of 6 and then decoded the
+; immediate as a separate instruction, desynchronising the sweep. The remaining 19 are added
+; below.
+;
 ; These have the addscale (<<1, <<2, <<3, <<4) forms missed out, because why
 ; would you?  Also shifts and bit ops, and other useless operations.
 
@@ -2504,6 +2510,76 @@
 (alu48opi2nsf ori48   "or")
 (alu48opi2nsf maxi48  "max")
 (alu48opi2nsf mini48  "min")
+
+; The other 19 of the 32 operations in `ops5bit`, all sharing the one 48-bit encoding
+; `1110 10ppppp ddddd <imm32>` (Hermitage videocoreiv.arch:367, corroborated by the Ghidra
+; SLEIGH spec). Mnemonic spellings follow `alu32uni` above, which already enumerates all 32 for
+; the 16-bit-immediate form -- note `bitrev` is spelled "brev" there.
+;
+; addscale needs a printed shift marker, so it gets a variant taking a suffix. It uses the
+; `alu16opr` convention ("addscale" plus a `$shlN` syntax marker) rather than `alu32uni`'s
+; ("add" with a pre-scaled immediate operand): the immediate here is a full 32 bits, so it
+; cannot be scaled at parse time without overflowing. Hermitage prints it the same way.
+; Semantics confirmed on hardware, not assumed -- `c3 ea 20 09 c7 c4` is addscale8 with
+; d=3, and it took r3 from babe0003 to e0f64903, i.e. rD += imm << 3.
+
+(define-pmacro (alu48opi2s x-name x-opcode x-suffix x-encoding)
+  (define-normal-insn
+    x-name (.str (.upcase x-name)) ()
+    (.str x-opcode ".l $alu48idreg,$alu48immu" x-suffix)
+    (+ OPLEN_14 OP11_10_2 (.sym ALU32OP_ (.upcase x-encoding)) alu48idreg
+       alu48immu)
+    () ())
+)
+
+(define-pmacro (alu48opi2snsf x-name x-opcode x-suffix)
+  (define-normal-macro-insn
+    (.sym x-name _nosuf) (.str (.upcase x-name) "_NOSUF") ()
+    (.str x-opcode " $alu48idreg,$alu48immu" x-suffix)
+    (emit x-name alu48idreg alu48immu))
+)
+
+(alu48opi2 noti48     "not"      NOT)
+(alu48opi2 rori48     "ror"      ROR)
+(alu48opi2 btesti48   "btest"    BTEST)
+(alu48opi2 bmaski48   "bmask"    BMASK)
+(alu48opi2 bseti48    "bitset"   BSET)
+(alu48opi2 bclri48    "bitclear" BCLR)
+(alu48opi2 bchgi48    "bitflip"  BCHG)
+(alu48opi2 signexti48 "signext"  SIGNEXT)
+(alu48opi2 negi48     "neg"      NEG)
+(alu48opi2 lsri48     "lsr"      LSR)
+(alu48opi2 msbi48     "msb"      MSB)
+(alu48opi2 shli48     "shl"      SHL)
+(alu48opi2 bitrevi48  "brev"     BITREV)
+(alu48opi2 asri48     "asr"      ASR)
+(alu48opi2 absi48     "abs"      ABS)
+
+(alu48opi2s adds2i48  "addscale" "$shl1" ADDS2)
+(alu48opi2s adds4i48  "addscale" "$shl2" ADDS4)
+(alu48opi2s adds8i48  "addscale" "$shl3" ADDS8)
+(alu48opi2s adds16i48 "addscale" "$shl4" ADDS16)
+
+(alu48opi2nsf noti48     "not")
+(alu48opi2nsf rori48     "ror")
+(alu48opi2nsf btesti48   "btest")
+(alu48opi2nsf bmaski48   "bmask")
+(alu48opi2nsf bseti48    "bitset")
+(alu48opi2nsf bclri48    "bitclear")
+(alu48opi2nsf bchgi48    "bitflip")
+(alu48opi2nsf signexti48 "signext")
+(alu48opi2nsf negi48     "neg")
+(alu48opi2nsf lsri48     "lsr")
+(alu48opi2nsf msbi48     "msb")
+(alu48opi2nsf shli48     "shl")
+(alu48opi2nsf bitrevi48  "brev")
+(alu48opi2nsf asri48     "asr")
+(alu48opi2nsf absi48     "abs")
+
+(alu48opi2snsf adds2i48  "addscale" "$shl1")
+(alu48opi2snsf adds4i48  "addscale" "$shl2")
+(alu48opi2snsf adds8i48  "addscale" "$shl3")
+(alu48opi2snsf adds16i48 "addscale" "$shl4")
 
 (include "vc4-vector.cpu")
 

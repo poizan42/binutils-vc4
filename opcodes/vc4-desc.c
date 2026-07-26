@@ -3017,6 +3017,101 @@ static const CGEN_IBASE vc4_cgen_insn_table[MAX_INSNS] =
     VC4_INSN_MINI48, "mini48", "min.l", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
+/* not.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_NOTI48, "noti48", "not.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* ror.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_RORI48, "rori48", "ror.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* btest.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_BTESTI48, "btesti48", "btest.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* bmask.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_BMASKI48, "bmaski48", "bmask.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* bitset.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_BSETI48, "bseti48", "bitset.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* bitclear.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_BCLRI48, "bclri48", "bitclear.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* bitflip.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_BCHGI48, "bchgi48", "bitflip.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* signext.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_SIGNEXTI48, "signexti48", "signext.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* neg.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_NEGI48, "negi48", "neg.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* lsr.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_LSRI48, "lsri48", "lsr.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* msb.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_MSBI48, "msbi48", "msb.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* shl.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_SHLI48, "shli48", "shl.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* brev.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_BITREVI48, "bitrevi48", "brev.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* asr.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_ASRI48, "asri48", "asr.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* abs.l $alu48idreg,$alu48immu */
+  {
+    VC4_INSN_ABSI48, "absi48", "abs.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* addscale.l $alu48idreg,$alu48immu$shl1 */
+  {
+    VC4_INSN_ADDS2I48, "adds2i48", "addscale.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* addscale.l $alu48idreg,$alu48immu$shl2 */
+  {
+    VC4_INSN_ADDS4I48, "adds4i48", "addscale.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* addscale.l $alu48idreg,$alu48immu$shl3 */
+  {
+    VC4_INSN_ADDS8I48, "adds8i48", "addscale.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
+/* addscale.l $alu48idreg,$alu48immu$shl4 */
+  {
+    VC4_INSN_ADDS16I48, "adds16i48", "addscale.l", 48,
+    { 0, { { { (1<<MACH_BASE), 0 } } } }
+  },
 /* v32mov $v48dreg_h$dplus_sr0,$v48sclr$setf_mod */
   {
     VC4_INSN_MOVHD48S32R0, "movhd48s32r0", "v32mov", 48,
