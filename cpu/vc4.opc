@@ -967,7 +967,11 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
         {
           if (sru_p)
             return "can't have DEC with SRU";
-          acc_sru |= ENA_BIT;
+          /* SUB_BIT is what makes this group a SUBTRACT rather than an add; without it every
+             UDEC/SDEC/USUB/SSUB assembled to the encoding of its UACC/SACC/UADD/SADD counterpart,
+             which the disassembler then printed back under the wrong name.  The printer's own
+             table below pairs WBA_BIT|SUB_BIT with "UDEC", so the two directions disagreed.  */
+          acc_sru |= ENA_BIT | SUB_BIT;
           if (strncmp ((*strp) + 1, "DEC", 3) == 0)
             acc_sru |= WBA_BIT;
           if (**strp == 'S')
