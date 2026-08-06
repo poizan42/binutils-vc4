@@ -110,6 +110,25 @@ err_out:
   return "Bad floating-point immediate";
 }
 
+/* True if the operand text at *STRP is a bare `-' with nothing after it
+   that could be an expression.  Gas's expression parser would accept that
+   with only a warning ("Unary operator - ignored...") and assemble garbage,
+   so immediate parsers must refuse it outright.  This matters for the
+   B slot of the vector insns: the register forms reject `-' there (it has
+   no absent encoding), and without this check the immediate variants would
+   silently pick the bare `-' up instead.  */
+
+static bool
+bare_dash_p (const char *ptr)
+{
+  if (*ptr != '-')
+    return false;
+  ptr++;
+  while (*ptr == ' ' || *ptr == '\t')
+    ptr++;
+  return *ptr == '\0' || *ptr == ',';
+}
+
 static const char *
 parse_shifted_uimm (CGEN_CPU_DESC cd, const char **strp, int opindex,
 		    unsigned long *valuep, unsigned bits, unsigned shift)
@@ -128,6 +147,9 @@ parse_shifted_uimm (CGEN_CPU_DESC cd, const char **strp, int opindex,
      fails to parse as an address.  */
   if (**strp == '+')
     return "post-inc";
+
+  if (bare_dash_p (*strp))
+    return "missing immediate (bare `-' is not an operand)";
 
   errmsg = cgen_parse_address (cd, strp, opindex, BFD_RELOC_NONE, &result_type,
                                &result);
@@ -201,6 +223,9 @@ parse_shifted_imm (CGEN_CPU_DESC cd, const char **strp, int opindex,
      fails to parse as an address.  */
   if (**strp == '+')
     return "post-inc";
+
+  if (bare_dash_p (*strp))
+    return "missing immediate (bare `-' is not an operand)";
 
   errmsg = cgen_parse_address (cd, strp, opindex, BFD_RELOC_NONE, &result_type,
                                &result);
@@ -577,7 +602,14 @@ parse_vector_reg (CGEN_CPU_DESC cd, const char **strp, int opindex,
   else if (ptr[0] == '-')
     {
       /* This is a special case.  Just hard-wire the "dash" encoding and
-         return.  */
+         return.  Except in the B slot: there is no absent encoding for it
+         -- 0x380 is selector 7/14 plus register 0, so a bare `-' would
+         silently mean "r0".  The operand is semantically live (it supplies
+         e.g. vgetacc's shift amount), so refuse the spelling and make the
+         register explicit.  */
+      if (whichop == OP_B)
+        return "B operand has no absent form ('-' would mean r0); name the register explicitly";
+
       *valuep = 0x380;
       *strp = ptr + 1;
 
