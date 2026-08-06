@@ -1471,10 +1471,20 @@ PRINT_SHLN(6)
 PRINT_SHLN(7)
 PRINT_SHLN(8)
 
-/* Vector insn printing.  */
+/* Vector insn printing.
+
+   AREG_P selects the "extended A operand" coordinate layout, in which the
+   four extra bits at 19..16 of the canonical value supply the fine
+   coordinate of the axis the 6-bit field does not carry.  That layout is a
+   property of the FIELD, not of the operand's role: only the 80-bit A
+   specifier has those extra bits (f-vec80areg's f-op51-48 subfield).  The
+   48-bit A specifier is a plain 9-bit field shaped exactly like the 48-bit D
+   and B ones, so it must be printed with AREG_P false -- see
+   print_vec48aluareg_v.  */
 
 static void
-print_vector_reg (void *dis_info, unsigned long value, vc4_operand whichop)
+print_vector_reg_1 (void *dis_info, unsigned long value, vc4_operand whichop,
+                    bool areg_p)
 {
   vc4_vec_dir vec_dir;
   unsigned x, y;
@@ -1482,7 +1492,6 @@ print_vector_reg (void *dis_info, unsigned long value, vc4_operand whichop)
   unsigned scalar_reg;
   disassemble_info *info = (disassemble_info *) dis_info;
   const char *typename;
-  bool areg_p = whichop == OP_A;
 
   switch ((value >> 6) & 15)
     {
@@ -1607,6 +1616,12 @@ print_vector_reg (void *dis_info, unsigned long value, vc4_operand whichop)
 
   if (column_offset)
     (*info->fprintf_func) (info->stream, "*");
+}
+
+static void
+print_vector_reg (void *dis_info, unsigned long value, vc4_operand whichop)
+{
+  print_vector_reg_1 (dis_info, value, whichop, whichop == OP_A);
 }
 
 static void
@@ -1884,6 +1899,25 @@ print_vec48aludreg_v (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
   print_vector_reg (dis_info, value | 0xf040, OP_D);
 }
 
+/* The 48-bit A operand is a 9-bit specifier (f-vec48areg: f-op21-19,
+   f-op17-16, f-op47-44), laid out exactly like the 48-bit D and B ones -- six
+   coordinate bits at 5..0 and three selector bits at 9..7, with no gap-6 and
+   no extra nibble at 19..16.  It therefore must NOT be printed with the
+   extended-A layout, which belongs to the 20-bit f-vec80areg.
+
+   Getting that wrong was invisible in the H direction, where the two layouts
+   coincide once the absent extra bits read as zero, and wrong in the V
+   direction, where the extended layout reads all six coordinate bits as the
+   row and drops the column's low nibble.  It printed rows that cannot exist:
+   a V operand covers sixteen consecutive rows from a 16-aligned base (probed
+   at y = 0, 16 and 48, vpu-sem/gen-vdir-probes.py), so only two row bits are
+   encodable, yet `V(63,0)` and `V(53,0)` were being printed.  What those
+   really are is `V(48,15)` and `V(48,5)`, which is also what the SLEIGH spec
+   decodes them to (vc4.slaspec's vay/vax under `Vopsize=0 & Vdir=1`:
+   row = VaHi << 4, column = VaLo + 16 * base).  The assembler's parse path
+   had it right all along, which is why V-direction disassembly did not
+   re-assemble.  */
+
 static void
 print_vec48aluareg_h (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 	              void * dis_info,
@@ -1892,7 +1926,7 @@ print_vec48aluareg_h (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 	              bfd_vma pc ATTRIBUTE_UNUSED,
 	              int length ATTRIBUTE_UNUSED)
 {
-  print_vector_reg (dis_info, (value & ~0x40) | 0xf000, OP_A);
+  print_vector_reg_1 (dis_info, (value & ~0x40) | 0xf000, OP_A, false);
 }
 
 static void
@@ -1903,7 +1937,7 @@ print_vec48aluareg_v (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 	              bfd_vma pc ATTRIBUTE_UNUSED,
 	              int length ATTRIBUTE_UNUSED)
 {
-  print_vector_reg (dis_info, value | 0xf040, OP_A);
+  print_vector_reg_1 (dis_info, value | 0xf040, OP_A, false);
 }
 
 /* The scalar case of the 48-bit B operand.  print_vector_reg's OP_B "dash"
