@@ -1268,10 +1268,39 @@ parse_vec48aluareg_v (CGEN_CPU_DESC cd, const char **strp, int opindex,
   return parse_vec48vvec (cd, strp, opindex, valuep, OP_A);
 }
 
+/* "(rN)": the B slot naming a scalar register instead of a vector one.  This
+   is what print_vec48_scalar_b prints, and it encodes the same bits the bare
+   "-" spelling does when N is 0.  */
+
+static const char *
+parse_vec48_scalar_b (CGEN_CPU_DESC cd, const char **strp, int opindex,
+                      unsigned long *valuep)
+{
+  unsigned reg;
+  const char *errmsg;
+
+  if (**strp != '(')
+    return "expected '('";
+  (*strp)++;
+
+  errmsg = parse_vc4_reg (cd, strp, opindex, &reg, VEC48_B_SCALAR_MAXREG);
+  if (errmsg)
+    return errmsg;
+
+  if (**strp != ')')
+    return "expected ')'";
+  (*strp)++;
+
+  *valuep = VEC48_B_SCALAR_ENCODE (reg);
+  return 0;
+}
+
 static const char *
 parse_vec48alubreg_h (CGEN_CPU_DESC cd, const char **strp, int opindex,
                       unsigned long *valuep)
 {
+  if (**strp == '(')
+    return parse_vec48_scalar_b (cd, strp, opindex, valuep);
   return parse_vec48hvec (cd, strp, opindex, valuep, OP_B);
 }
 
@@ -1279,6 +1308,8 @@ static const char *
 parse_vec48alubreg_v (CGEN_CPU_DESC cd, const char **strp, int opindex,
                       unsigned long *valuep)
 {
+  if (**strp == '(')
+    return parse_vec48_scalar_b (cd, strp, opindex, valuep);
   return parse_vec48vvec (cd, strp, opindex, valuep, OP_B);
 }
 

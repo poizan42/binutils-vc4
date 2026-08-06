@@ -626,6 +626,24 @@ print_vec48aluareg_v (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
   print_vector_reg (dis_info, value | 0xf040, OP_A);
 }
 
+/* The scalar case of the 48-bit B operand.  print_vector_reg's OP_B "dash"
+   branch is written for the *80-bit* B slot, where bits 15..12 really are a
+   scalar register and the rest is a signed 9-bit displacement.  The 48-bit
+   composite has no such nibble -- the wrappers below used to fabricate one by
+   OR-ing in 0xf000 -- so that branch rendered every 48-bit scalar B as
+   "r15+<field>", which the assembler cannot read back.  Print "(rN)" instead,
+   matching the $v48sclr spelling of the two-operand ld/st forms.  */
+
+static void
+print_vec48_scalar_b (void * dis_info, unsigned long value)
+{
+  disassemble_info *info = (disassemble_info *) dis_info;
+
+  (*info->fprintf_func) (info->stream, "(");
+  print_scalar_reg (info, VEC48_B_SCALAR_REG (value));
+  (*info->fprintf_func) (info->stream, ")");
+}
+
 static void
 print_vec48alubreg_h (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 	              void * dis_info,
@@ -634,7 +652,10 @@ print_vec48alubreg_h (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 	              bfd_vma pc ATTRIBUTE_UNUSED,
 	              int length ATTRIBUTE_UNUSED)
 {
-  print_vector_reg (dis_info, (value & ~0x40) | 0xf000, OP_B);
+  if (VEC48_B_IS_SCALAR (value))
+    print_vec48_scalar_b (dis_info, value);
+  else
+    print_vector_reg (dis_info, (value & ~0x40) | 0xf000, OP_B);
 }
 
 static void
@@ -645,7 +666,10 @@ print_vec48alubreg_v (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
 	              bfd_vma pc ATTRIBUTE_UNUSED,
 	              int length ATTRIBUTE_UNUSED)
 {
-  print_vector_reg (dis_info, value | 0xf040, OP_B);
+  if (VEC48_B_IS_SCALAR (value))
+    print_vec48_scalar_b (dis_info, value);
+  else
+    print_vector_reg (dis_info, value | 0xf040, OP_B);
 }
 
 static void

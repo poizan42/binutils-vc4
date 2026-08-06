@@ -80,6 +80,20 @@ typedef enum
   OP_B
 } vc4_operand;
 
+/* The B operand of a 48-bit vector insn is the 9-bit f-vec48breg composite:
+   the low six bits come from f-op37-32 and bits 9..7 from f-op41-39 (bit 6 is
+   the gap the composite leaves for f-op38).  When f-op41-39 is all-ones the
+   slot does not name a vector register at all -- it holds a scalar register
+   selector in its low six bits, exactly like the $v48sclr operand of the
+   two-operand ld/st forms, and on silicon that register is live (for vgetacc
+   its low six bits are the accumulator shift amount).  Spell it "(rN)" so it
+   reads the same as $v48sclr and can be assembled back.  */
+
+#define VEC48_B_IS_SCALAR(v) ((((v) >> 7) & 7) == 7)
+#define VEC48_B_SCALAR_ENCODE(n) (0x380 | ((n) & 0x3f))
+#define VEC48_B_SCALAR_REG(v) ((v) & 0x3f)
+#define VEC48_B_SCALAR_MAXREG 63
+
 /* -- asm.c */
 /* Enum declaration for vc4 instruction types.  */
 typedef enum cgen_insn_type {
