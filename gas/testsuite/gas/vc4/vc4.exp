@@ -33,4 +33,6 @@ if [istarget vc4-*-*] then {
     run_dump_test "add16i"
     run_dump_test "addsubscale"
     run_dump_test "shiftedalu"
+# a bare `-` in the vector B slot must be an ERROR, not a silent r0
+    run_list_test "bslot-dash" ""
 }
