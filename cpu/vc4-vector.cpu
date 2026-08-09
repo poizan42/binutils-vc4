@@ -993,13 +993,17 @@
   (define-normal-insn
     (.sym vgetacc48 x-sat x-dir x-sreg)
     (.str "VGETACC48" (.upcase x-sat) (.upcase x-dir) (.upcase x-sreg)) ()
+    ; Bit 38 in this form is Vsetf48, NOT a B-operand post-increment: getacc
+    ; has no memory address, so there is no B offset to add rN to.  Render and
+    ; parse it as SETF, matching vld48insn/vst48insn (both index f-op38 too, so
+    ; the encoding is byte-identical -- only the spelling and the accepted
+    ; syntax change).  See task #122.
     (.str "vgetacc" x-sat " $v48dreg_" x-dir "$dplus_s" x-sreg
-          ",$v48areg_" x-dir "$aplus_s" x-sreg ",$v48breg_" x-dir "$bplus_s"
-          x-sreg)
+          ",$v48areg_" x-dir "$aplus_s" x-sreg ",$v48breg_" x-dir "$setf_mod")
     (+ (f-op15-10 60) VMEMOP_GETACC (.sym VMEMSAT_ x-sat)
        (.sym SREG_ (.upcase x-sreg)) (.sym v48dreg_ x-dir) (.sym v48areg_ x-dir)
        (.sym v48breg_ x-dir) (.sym VECDIR_ (.upcase x-dir)) (f-op42 0)
-       (.sym dplus_s x-sreg) (.sym aplus_s x-sreg) (.sym bplus_s x-sreg))
+       (.sym dplus_s x-sreg) (.sym aplus_s x-sreg) setf_mod)
     () ())
 )
 

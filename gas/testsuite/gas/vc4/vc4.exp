@@ -33,6 +33,8 @@ if [istarget vc4-*-*] then {
     run_dump_test "add16i"
     run_dump_test "addsubscale"
     run_dump_test "shiftedalu"
+# vgetacc's 48-bit SETF (bit 38) must spell SETF, not the `+r0` addressing mode
+    run_dump_test "getacc-setf"
 # a bare `-` in the vector B slot must be an ERROR, not a silent r0
     run_list_test "bslot-dash" ""
 }

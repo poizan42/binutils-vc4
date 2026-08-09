@@ -45684,322 +45684,322 @@ static const CGEN_IBASE vc4_cgen_insn_table[MAX_INSNS] =
     VC4_INSN_VUNKMEM31V48GENR7, "vunkmem31v48genr7", "vunkmem31", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$bplus_sr0 */
+/* vgetacc $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR0, "vgetacc48hr0", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$bplus_sr1 */
+/* vgetacc $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR1, "vgetacc48hr1", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$bplus_sr2 */
+/* vgetacc $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR2, "vgetacc48hr2", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$bplus_sr3 */
+/* vgetacc $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR3, "vgetacc48hr3", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$bplus_sr4 */
+/* vgetacc $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR4, "vgetacc48hr4", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$bplus_sr5 */
+/* vgetacc $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR5, "vgetacc48hr5", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$bplus_sr6 */
+/* vgetacc $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR6, "vgetacc48hr6", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$bplus_sr7 */
+/* vgetacc $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48HR7, "vgetacc48hr7", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$bplus_sr0 */
+/* vgetacc $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR0, "vgetacc48vr0", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$bplus_sr1 */
+/* vgetacc $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR1, "vgetacc48vr1", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$bplus_sr2 */
+/* vgetacc $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR2, "vgetacc48vr2", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$bplus_sr3 */
+/* vgetacc $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR3, "vgetacc48vr3", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$bplus_sr4 */
+/* vgetacc $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR4, "vgetacc48vr4", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$bplus_sr5 */
+/* vgetacc $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR5, "vgetacc48vr5", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$bplus_sr6 */
+/* vgetacc $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR6, "vgetacc48vr6", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetacc $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$bplus_sr7 */
+/* vgetacc $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48VR7, "vgetacc48vr7", "vgetacc", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$bplus_sr0 */
+/* vgetaccs32 $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR0, "vgetacc48s32hr0", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$bplus_sr1 */
+/* vgetaccs32 $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR1, "vgetacc48s32hr1", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$bplus_sr2 */
+/* vgetaccs32 $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR2, "vgetacc48s32hr2", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$bplus_sr3 */
+/* vgetaccs32 $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR3, "vgetacc48s32hr3", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$bplus_sr4 */
+/* vgetaccs32 $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR4, "vgetacc48s32hr4", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$bplus_sr5 */
+/* vgetaccs32 $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR5, "vgetacc48s32hr5", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$bplus_sr6 */
+/* vgetaccs32 $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR6, "vgetacc48s32hr6", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$bplus_sr7 */
+/* vgetaccs32 $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S32HR7, "vgetacc48s32hr7", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$bplus_sr0 */
+/* vgetaccs32 $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR0, "vgetacc48s32vr0", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$bplus_sr1 */
+/* vgetaccs32 $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR1, "vgetacc48s32vr1", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$bplus_sr2 */
+/* vgetaccs32 $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR2, "vgetacc48s32vr2", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$bplus_sr3 */
+/* vgetaccs32 $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR3, "vgetacc48s32vr3", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$bplus_sr4 */
+/* vgetaccs32 $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR4, "vgetacc48s32vr4", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$bplus_sr5 */
+/* vgetaccs32 $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR5, "vgetacc48s32vr5", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$bplus_sr6 */
+/* vgetaccs32 $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR6, "vgetacc48s32vr6", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs32 $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$bplus_sr7 */
+/* vgetaccs32 $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S32VR7, "vgetacc48s32vr7", "vgetaccs32", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$bplus_sr0 */
+/* vgetaccunk $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR0, "vgetacc48unkhr0", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$bplus_sr1 */
+/* vgetaccunk $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR1, "vgetacc48unkhr1", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$bplus_sr2 */
+/* vgetaccunk $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR2, "vgetacc48unkhr2", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$bplus_sr3 */
+/* vgetaccunk $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR3, "vgetacc48unkhr3", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$bplus_sr4 */
+/* vgetaccunk $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR4, "vgetacc48unkhr4", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$bplus_sr5 */
+/* vgetaccunk $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR5, "vgetacc48unkhr5", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$bplus_sr6 */
+/* vgetaccunk $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR6, "vgetacc48unkhr6", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$bplus_sr7 */
+/* vgetaccunk $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48UNKHR7, "vgetacc48unkhr7", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$bplus_sr0 */
+/* vgetaccunk $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR0, "vgetacc48unkvr0", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$bplus_sr1 */
+/* vgetaccunk $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR1, "vgetacc48unkvr1", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$bplus_sr2 */
+/* vgetaccunk $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR2, "vgetacc48unkvr2", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$bplus_sr3 */
+/* vgetaccunk $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR3, "vgetacc48unkvr3", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$bplus_sr4 */
+/* vgetaccunk $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR4, "vgetacc48unkvr4", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$bplus_sr5 */
+/* vgetaccunk $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR5, "vgetacc48unkvr5", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$bplus_sr6 */
+/* vgetaccunk $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR6, "vgetacc48unkvr6", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccunk $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$bplus_sr7 */
+/* vgetaccunk $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48UNKVR7, "vgetacc48unkvr7", "vgetaccunk", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$bplus_sr0 */
+/* vgetaccs16 $v48dreg_h$dplus_sr0,$v48areg_h$aplus_sr0,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR0, "vgetacc48s16hr0", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$bplus_sr1 */
+/* vgetaccs16 $v48dreg_h$dplus_sr1,$v48areg_h$aplus_sr1,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR1, "vgetacc48s16hr1", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$bplus_sr2 */
+/* vgetaccs16 $v48dreg_h$dplus_sr2,$v48areg_h$aplus_sr2,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR2, "vgetacc48s16hr2", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$bplus_sr3 */
+/* vgetaccs16 $v48dreg_h$dplus_sr3,$v48areg_h$aplus_sr3,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR3, "vgetacc48s16hr3", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$bplus_sr4 */
+/* vgetaccs16 $v48dreg_h$dplus_sr4,$v48areg_h$aplus_sr4,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR4, "vgetacc48s16hr4", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$bplus_sr5 */
+/* vgetaccs16 $v48dreg_h$dplus_sr5,$v48areg_h$aplus_sr5,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR5, "vgetacc48s16hr5", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$bplus_sr6 */
+/* vgetaccs16 $v48dreg_h$dplus_sr6,$v48areg_h$aplus_sr6,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR6, "vgetacc48s16hr6", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$bplus_sr7 */
+/* vgetaccs16 $v48dreg_h$dplus_sr7,$v48areg_h$aplus_sr7,$v48breg_h$setf_mod */
   {
     VC4_INSN_VGETACC48S16HR7, "vgetacc48s16hr7", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$bplus_sr0 */
+/* vgetaccs16 $v48dreg_v$dplus_sr0,$v48areg_v$aplus_sr0,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR0, "vgetacc48s16vr0", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$bplus_sr1 */
+/* vgetaccs16 $v48dreg_v$dplus_sr1,$v48areg_v$aplus_sr1,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR1, "vgetacc48s16vr1", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$bplus_sr2 */
+/* vgetaccs16 $v48dreg_v$dplus_sr2,$v48areg_v$aplus_sr2,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR2, "vgetacc48s16vr2", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$bplus_sr3 */
+/* vgetaccs16 $v48dreg_v$dplus_sr3,$v48areg_v$aplus_sr3,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR3, "vgetacc48s16vr3", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$bplus_sr4 */
+/* vgetaccs16 $v48dreg_v$dplus_sr4,$v48areg_v$aplus_sr4,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR4, "vgetacc48s16vr4", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$bplus_sr5 */
+/* vgetaccs16 $v48dreg_v$dplus_sr5,$v48areg_v$aplus_sr5,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR5, "vgetacc48s16vr5", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$bplus_sr6 */
+/* vgetaccs16 $v48dreg_v$dplus_sr6,$v48areg_v$aplus_sr6,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR6, "vgetacc48s16vr6", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
   },
-/* vgetaccs16 $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$bplus_sr7 */
+/* vgetaccs16 $v48dreg_v$dplus_sr7,$v48areg_v$aplus_sr7,$v48breg_v$setf_mod */
   {
     VC4_INSN_VGETACC48S16VR7, "vgetacc48s16vr7", "vgetaccs16", 48,
     { 0, { { { (1<<MACH_BASE), 0 } } } }
