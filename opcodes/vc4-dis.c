@@ -62,6 +62,59 @@ static int read_insn
 
 #define CGEN_PRINT_INSN vc4_print_insn
 
+/* #125: a DUAL80 80-bit vector form is "narrowable" -- a 48-bit form encodes
+   the same operands+modifiers -- when its aux word carries nothing 80-bit-only.
+   The disassembler prints a leading `{wide}' for such forms so the long
+   encoding round-trips (the assembler's `{wide}' pseudo-prefix forces it).
+   Reads the decoded composite fields (f_vec80{d,a,b}reg, f_vec80mods), which
+   are populated for the DUAL80-tagged 3-register v80mods forms.  */
+
+/* A register-composite operand is narrowable when its scalar_reg selector is
+   15 (absent/present-vector, encodes identically in 48- and 80-bit -- #131),
+   with no column offset (bit 10) and no post-increment (bit 11).  A scalar
+   `rN' (selector != 15) has no 48-bit-equivalent 80-bit spelling.  */
+#define VC4_NARROW_REG_OK(v) \
+  ((((v) >> 12) & 0xf) == 0xf && (((v) >> 10) & 1) == 0 && (((v) >> 11) & 1) == 0)
+
+static bool
+vc4_is_narrowable (const CGEN_INSN *insn, CGEN_FIELDS *fields)
+{
+  /* Mods composite: rep (bits 0-2), setf (bit 3), predication (bits 4-6),
+     acc/sru (bits 7-13).  Any of rep/pred/acc/sru makes the form genuinely
+     80-bit.  SETF is subtler: a 48-bit SETF encoding exists for getacc (bit
+     Vsetf48), so SETF does NOT disqualify a getacc form (DUAL80SETFOK) -- but
+     the 48-bit ALU/mul row-B forms have no SETF, so there SETF forces 80-bit
+     and the form is NOT narrowable.  */
+  long modsmask = CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80SETFOK)
+                  ? ~(long) 0x8 : ~(long) 0;
+  if ((fields->f_vec80mods & modsmask) != 0)
+    return false;
+  if (!VC4_NARROW_REG_OK (fields->f_vec80dreg))
+    return false;
+  if (!VC4_NARROW_REG_OK (fields->f_vec80areg))
+    return false;
+  if (!VC4_NARROW_REG_OK (fields->f_vec80breg))
+    return false;
+  return true;
+}
+
+/* Called from print_insn_normal (cgen-dis.in) before the mnemonic.  */
+#define CGEN_PRINT_INSN_PREFIX vc4_print_insn_prefix
+
+static void
+vc4_print_insn_prefix (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
+                       const CGEN_INSN *insn, CGEN_FIELDS *fields,
+                       disassemble_info *info, bfd_vma pc ATTRIBUTE_UNUSED,
+                       int length ATTRIBUTE_UNUSED)
+{
+  if (CGEN_INSN_BITSIZE (insn) != 80)
+    return;
+  if (!CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80))
+    return;
+  if (vc4_is_narrowable (insn, fields))
+    (*info->fprintf_func) (info->stream, "{wide} ");
+}
+
 typedef enum
 {
   VC4_STANDARD_INSN,
@@ -1217,6 +1270,12 @@ print_insn_normal (CGEN_CPU_DESC cd,
   const CGEN_SYNTAX_CHAR_TYPE *syn;
 
   CGEN_INIT_PRINT (cd);
+
+  /* Target hook to emit a leading pseudo-prefix before the mnemonic (e.g. vc4's
+     `{wide}').  Inert unless the target's .opc dis section defines it.  */
+#ifdef CGEN_PRINT_INSN_PREFIX
+  CGEN_PRINT_INSN_PREFIX (cd, insn, fields, info, pc, length);
+#endif
 
   for (syn = CGEN_SYNTAX_STRING (syntax); *syn; ++syn)
     {

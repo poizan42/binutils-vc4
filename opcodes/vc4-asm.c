@@ -53,6 +53,12 @@ static const char * parse_insn_normal
 
 #include <errno.h>
 
+/* Set by gas's `{wide}' pseudo-prefix hook (tc-vc4.c).  When non-zero, the
+   48-bit vector-register operand parsers below fail, so gas falls through to
+   the already-existing 80-bit twin -- forcing the long encoding.  Defined here
+   (in libopcodes, where the parsers live) so both gas and the parsers link it.  */
+int vc4_force_wide = 0;
+
 union floatbits {
   float f;
   uint32_t u;
@@ -1244,8 +1250,14 @@ static const char *
 parse_vec48hvec (CGEN_CPU_DESC cd, const char **strp, int opindex,
                  unsigned long *valuep, vc4_operand whichop)
 {
-  const char *errmsg = parse_vector_reg (cd, strp, opindex, valuep, whichop,
-                                         false);
+  const char *errmsg;
+
+  /* `{wide}' forces the 80-bit twin: fail every 48-bit dual-width form (they
+     all route a D/A operand through here) so gas falls through to it.  */
+  if (vc4_force_wide)
+    return "forced 80-bit form (`{wide}')";
+
+  errmsg = parse_vector_reg (cd, strp, opindex, valuep, whichop, false);
 
   if (errmsg)
     return errmsg;
@@ -1263,8 +1275,12 @@ static const char *
 parse_vec48vvec (CGEN_CPU_DESC cd, const char **strp, int opindex,
                  unsigned long *valuep, vc4_operand whichop)
 {
-  const char *errmsg = parse_vector_reg (cd, strp, opindex, valuep, whichop,
-                                         false);
+  const char *errmsg;
+
+  if (vc4_force_wide)
+    return "forced 80-bit form (`{wide}')";
+
+  errmsg = parse_vector_reg (cd, strp, opindex, valuep, whichop, false);
 
   if (errmsg)
     return errmsg;

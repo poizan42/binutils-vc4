@@ -37,6 +37,13 @@ extern unsigned long vc4_machine;
 extern const char vc4_comment_chars [];
 #define tc_comment_chars vc4_comment_chars
 
+/* Recognize the leading `{wide}' pseudo-prefix (x86 `{disp32}'-style) that
+   forces the 80-bit encoding of a dual-width vector op.  */
+extern int vc4_unrecognized_line (int);
+#define tc_unrecognized_line vc4_unrecognized_line
+extern void vc4_start_line_hook (void);
+#define md_start_line_hook vc4_start_line_hook
+
 /* Permit temporary numeric labels.  */
 #define LOCAL_LABELS_FB	1
 

@@ -451,8 +451,9 @@ typedef enum cgen_operand_type {
 typedef enum cgen_insn_attr {
   CGEN_INSN_ALIAS, CGEN_INSN_VIRTUAL, CGEN_INSN_UNCOND_CTI, CGEN_INSN_COND_CTI
  , CGEN_INSN_SKIP_CTI, CGEN_INSN_DELAY_SLOT, CGEN_INSN_RELAXABLE, CGEN_INSN_RELAXED
- , CGEN_INSN_NO_DIS, CGEN_INSN_PBB, CGEN_INSN_SWITCH, CGEN_INSN_END_BOOLS
- , CGEN_INSN_START_NBOOLS = 31, CGEN_INSN_MACH, CGEN_INSN_END_NBOOLS
+ , CGEN_INSN_NO_DIS, CGEN_INSN_PBB, CGEN_INSN_SWITCH, CGEN_INSN_DUAL80
+ , CGEN_INSN_DUAL80SETFOK, CGEN_INSN_END_BOOLS, CGEN_INSN_START_NBOOLS = 31, CGEN_INSN_MACH
+ , CGEN_INSN_END_NBOOLS
 } CGEN_INSN_ATTR;
 
 /* Number of non-boolean elements in cgen_insn_attr.  */
@@ -471,6 +472,8 @@ typedef enum cgen_insn_attr {
 #define CGEN_ATTR_CGEN_INSN_NO_DIS_VALUE(attrs) (((attrs)->bool_ & (1 << CGEN_INSN_NO_DIS)) != 0)
 #define CGEN_ATTR_CGEN_INSN_PBB_VALUE(attrs) (((attrs)->bool_ & (1 << CGEN_INSN_PBB)) != 0)
 #define CGEN_ATTR_CGEN_INSN_SWITCH_VALUE(attrs) (((attrs)->bool_ & (1 << CGEN_INSN_SWITCH)) != 0)
+#define CGEN_ATTR_CGEN_INSN_DUAL80_VALUE(attrs) (((attrs)->bool_ & (1 << CGEN_INSN_DUAL80)) != 0)
+#define CGEN_ATTR_CGEN_INSN_DUAL80SETFOK_VALUE(attrs) (((attrs)->bool_ & (1 << CGEN_INSN_DUAL80SETFOK)) != 0)
 
 /* cgen.h uses things we just defined.  */
 #include "opcode/cgen.h"

@@ -141,6 +141,12 @@ print_insn_normal (CGEN_CPU_DESC cd,
 
   CGEN_INIT_PRINT (cd);
 
+  /* Target hook to emit a leading pseudo-prefix before the mnemonic (e.g. vc4's
+     `{wide}').  Inert unless the target's .opc dis section defines it.  */
+#ifdef CGEN_PRINT_INSN_PREFIX
+  CGEN_PRINT_INSN_PREFIX (cd, insn, fields, info, pc, length);
+#endif
+
   for (syn = CGEN_SYNTAX_STRING (syntax); *syn; ++syn)
     {
       if (CGEN_SYNTAX_MNEMONIC_P (*syn))

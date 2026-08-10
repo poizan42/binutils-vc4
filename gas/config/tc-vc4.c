@@ -140,6 +140,53 @@ md_begin (void)
   cgen_set_parse_operand_fn (gas_cgen_cpu_desc, gas_cgen_parse_operand);
 }
 
+/* The `{wide}' pseudo-prefix.  vc4_force_wide is defined in libopcodes
+   (cpu/vc4.opc); the 48-bit vector operand parsers consult it and fail so gas
+   falls through to the already-existing 80-bit twin.  vc4_pending_wide is set
+   by the line hook and consumed by the next md_assemble.  */
+extern int vc4_force_wide;
+static int vc4_pending_wide = 0;
+
+/* Recognize a leading `{wide}' pseudo-prefix (x86 `{disp32}'-style).  On entry
+   INPUT_LINE_POINTER is one char past the `{' (== CH); leave it at the real
+   mnemonic and return 1 so read.c re-enters the main loop there.  */
+int
+vc4_unrecognized_line (int ch)
+{
+  char *p;
+
+  if (ch != '{')
+    return 0;
+
+  p = input_line_pointer;
+  while (ISSPACE (*p))
+    p++;
+  if (strncmp (p, "wide", 4) != 0)
+    return 0;
+  p += 4;
+  while (ISSPACE (*p))
+    p++;
+  if (*p != '}')
+    return 0;
+  p++;
+
+  vc4_pending_wide = 1;
+  input_line_pointer = p;
+  return 1;
+}
+
+/* Fires at every true line start.  A `{wide}' that was not followed by a
+   widenable instruction is left pending here -- warn and drop it.  */
+void
+vc4_start_line_hook (void)
+{
+  if (vc4_pending_wide)
+    {
+      as_warn (_("`{wide}' prefix without a widenable instruction; ignored"));
+      vc4_pending_wide = 0;
+    }
+}
+
 void
 md_assemble (char *str)
 {
@@ -149,8 +196,15 @@ md_assemble (char *str)
   /* Initialize GAS's cgen interface for a new instruction.  */
   gas_cgen_init_parse ();
 
+  /* Apply a pending `{wide}' to exactly this instruction, then clear it
+     unconditionally (including the error path below).  */
+  vc4_force_wide = vc4_pending_wide;
+  vc4_pending_wide = 0;
+
   insn.insn = vc4_cgen_assemble_insn
     (gas_cgen_cpu_desc, str, & insn.fields, insn.buffer, & errmsg);
+
+  vc4_force_wide = 0;
 
   if (!insn.insn)
     {

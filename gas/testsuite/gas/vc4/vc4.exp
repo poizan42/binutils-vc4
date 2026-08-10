@@ -39,6 +39,8 @@ if [istarget vc4-*-*] then {
     run_dump_test "alu80-setf"
 # the vector-multiply family (Vaop 48..61 + mul32); mnemonics need a signedness suffix (#130 non-bug)
     run_dump_test "vecmul"
+# the leading `{wide}' pseudo-prefix forces + round-trips the 80-bit encoding of a dual-width op (#125)
+    run_dump_test "wide"
 # a bare `-` in the vector B slot must be an ERROR, not a silent r0
     run_list_test "bslot-dash" ""
 }

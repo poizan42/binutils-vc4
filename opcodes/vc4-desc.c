@@ -110,6 +110,8 @@ const CGEN_ATTR_TABLE vc4_cgen_insn_attr_table[] =
   { "NO-DIS", &bool_attr[0], &bool_attr[0] },
   { "PBB", &bool_attr[0], &bool_attr[0] },
   { "SWITCH", &bool_attr[0], &bool_attr[0] },
+  { "DUAL80", &bool_attr[0], &bool_attr[0] },
+  { "DUAL80SETFOK", &bool_attr[0], &bool_attr[0] },
   { 0, 0, 0 }
 };
 
@@ -56257,232 +56259,232 @@ static const CGEN_IBASE vc4_cgen_insn_table[MAX_INSNS] =
 /* v32even $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_EVEND80V32, "evend80v32", "v32even", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32odd $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ODDD80V32, "oddd80v32", "v32odd", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32interl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_INTERLD80V32, "interld80v32", "v32interl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32interh $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_INTERHD80V32, "interhd80v32", "v32interh", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32bitrev $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_BITREVD80V32, "bitrevd80v32", "v32bitrev", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32ror $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RORD80V32, "rord80v32", "v32ror", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32shl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SHLD80V32, "shld80v32", "v32shl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32shls $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SHLSD80V32, "shlsd80v32", "v32shls", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32lsr $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_LSRD80V32, "lsrd80v32", "v32lsr", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32asr $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ASRD80V32, "asrd80v32", "v32asr", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32signshl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGNSHLD80V32, "signshld80v32", "v32signshl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op13 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP13D80V32, "op13d80v32", "v32op13", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32signasl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGNASLD80V32, "signasld80v32", "v32signasl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32signasls $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGNASLSD80V32, "signaslsd80v32", "v32signasls", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32and $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ANDD80V32, "andd80v32", "v32and", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32or $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ORD80V32, "ord80v32", "v32or", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32eor $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_EORD80V32, "eord80v32", "v32eor", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32bic $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_BICD80V32, "bicd80v32", "v32bic", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32count $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_COUNTD80V32, "countd80v32", "v32count", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32msb $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MSBD80V32, "msbd80v32", "v32msb", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op22 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP22D80V32, "op22d80v32", "v32op22", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op23 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP23D80V32, "op23d80v32", "v32op23", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32min $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MIND80V32, "mind80v32", "v32min", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32max $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MAXD80V32, "maxd80v32", "v32max", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32dist $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_DISTD80V32, "distd80v32", "v32dist", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32dists $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_DISTSD80V32, "distsd80v32", "v32dists", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32clip $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_CLIPD80V32, "clipd80v32", "v32clip", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32sign $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGND80V32, "signd80v32", "v32sign", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32clips $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_CLIPSD80V32, "clipsd80v32", "v32clips", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32testmag $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_TESTMAGD80V32, "testmagd80v32", "v32testmag", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32add $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDD80V32, "addd80v32", "v32add", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32adds $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDSD80V32, "addsd80v32", "v32adds", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32addc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDCD80V32, "addcd80v32", "v32addc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32addsc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDSCD80V32, "addscd80v32", "v32addsc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32sub $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBD80V32, "subd80v32", "v32sub", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32subs $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBSD80V32, "subsd80v32", "v32subs", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32subc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBCD80V32, "subcd80v32", "v32subc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32subsc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBSCD80V32, "subscd80v32", "v32subsc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32rsub $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBD80V32, "rsubd80v32", "v32rsub", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32rsubs $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBSD80V32, "rsubsd80v32", "v32rsubs", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32rsubc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBCD80V32, "rsubcd80v32", "v32rsubc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32rsubsc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBSCD80V32, "rsubscd80v32", "v32rsubsc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op44 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP44D80V32, "op44d80v32", "v32op44", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op45 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP45D80V32, "op45d80v32", "v32op45", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op46 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP46D80V32, "op46d80v32", "v32op46", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32op47 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP47D80V32, "op47d80v32", "v32op47", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mov $v80d32reg,$v80b32reg$v80mods */
   {
@@ -56497,392 +56499,392 @@ static const CGEN_IBASE vc4_cgen_insn_table[MAX_INSNS] =
 /* v16even $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_EVEND80V16, "evend80v16", "v16even", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16odd $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ODDD80V16, "oddd80v16", "v16odd", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16interl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_INTERLD80V16, "interld80v16", "v16interl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16interh $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_INTERHD80V16, "interhd80v16", "v16interh", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16bitrev $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_BITREVD80V16, "bitrevd80v16", "v16bitrev", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16ror $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RORD80V16, "rord80v16", "v16ror", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16shl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SHLD80V16, "shld80v16", "v16shl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16shls $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SHLSD80V16, "shlsd80v16", "v16shls", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16lsr $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_LSRD80V16, "lsrd80v16", "v16lsr", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16asr $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ASRD80V16, "asrd80v16", "v16asr", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16signshl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGNSHLD80V16, "signshld80v16", "v16signshl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op13 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP13D80V16, "op13d80v16", "v16op13", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16signasl $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGNASLD80V16, "signasld80v16", "v16signasl", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16signasls $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGNASLSD80V16, "signaslsd80v16", "v16signasls", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16and $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ANDD80V16, "andd80v16", "v16and", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16or $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ORD80V16, "ord80v16", "v16or", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16eor $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_EORD80V16, "eord80v16", "v16eor", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16bic $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_BICD80V16, "bicd80v16", "v16bic", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16count $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_COUNTD80V16, "countd80v16", "v16count", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16msb $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MSBD80V16, "msbd80v16", "v16msb", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op22 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP22D80V16, "op22d80v16", "v16op22", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op23 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP23D80V16, "op23d80v16", "v16op23", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16min $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MIND80V16, "mind80v16", "v16min", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16max $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MAXD80V16, "maxd80v16", "v16max", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16dist $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_DISTD80V16, "distd80v16", "v16dist", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16dists $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_DISTSD80V16, "distsd80v16", "v16dists", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16clip $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_CLIPD80V16, "clipd80v16", "v16clip", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16sign $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SIGND80V16, "signd80v16", "v16sign", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16clips $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_CLIPSD80V16, "clipsd80v16", "v16clips", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16testmag $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_TESTMAGD80V16, "testmagd80v16", "v16testmag", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16add $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDD80V16, "addd80v16", "v16add", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16adds $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDSD80V16, "addsd80v16", "v16adds", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16addc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDCD80V16, "addcd80v16", "v16addc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16addsc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_ADDSCD80V16, "addscd80v16", "v16addsc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16sub $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBD80V16, "subd80v16", "v16sub", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16subs $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBSD80V16, "subsd80v16", "v16subs", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16subc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBCD80V16, "subcd80v16", "v16subc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16subsc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_SUBSCD80V16, "subscd80v16", "v16subsc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16rsub $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBD80V16, "rsubd80v16", "v16rsub", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16rsubs $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBSD80V16, "rsubsd80v16", "v16rsubs", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16rsubc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBCD80V16, "rsubcd80v16", "v16rsubc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16rsubsc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_RSUBSCD80V16, "rsubscd80v16", "v16rsubsc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op44 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP44D80V16, "op44d80v16", "v16op44", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op45 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP45D80V16, "op45d80v16", "v16op45", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op46 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP46D80V16, "op46d80v16", "v16op46", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16op47 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP47D80V16, "op47d80v16", "v16op47", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmull.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULLSSD80V, "mullssd80v", "vmull.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulls.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULLSSSD80V, "mullsssd80v", "vmulls.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulm.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULMSSD80V, "mulmssd80v", "vmulm.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulms.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULMSSSD80V, "mulmsssd80v", "vmulms.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhd.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHDSSD80V, "mulhdssd80v", "vmulhd.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhd.su $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHDSUD80V, "mulhdsud80v", "vmulhd.su", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhd.us $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHDUSD80V, "mulhdusd80v", "vmulhd.us", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhd.uu $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHDUUD80V, "mulhduud80v", "vmulhd.uu", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhn.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHNSSD80V, "mulhnssd80v", "vmulhn.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhn.su $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHNSUD80V, "mulhnsud80v", "vmulhn.su", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhn.us $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHNUSD80V, "mulhnusd80v", "vmulhn.us", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhn.uu $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHNUUD80V, "mulhnuud80v", "vmulhn.uu", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhdt.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHDTSSD80V, "mulhdtssd80v", "vmulhdt.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmulhdt.su $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MULHDTSUD80V, "mulhdtsud80v", "vmulhdt.su", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop62.0 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP620D80V, "op620d80v", "vop62.0", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop63.0 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP630D80V, "op630d80v", "vop63.0", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop48.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP481D80V, "op481d80v", "vop48.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop49.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP491D80V, "op491d80v", "vop49.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop50.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP501D80V, "op501d80v", "vop50.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop51.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP511D80V, "op511d80v", "vop51.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmul32.ss $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MUL32SSD80V, "mul32ssd80v", "vmul32.ss", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmul32.su $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MUL32SUD80V, "mul32sud80v", "vmul32.su", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmul32.us $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MUL32USD80V, "mul32usd80v", "vmul32.us", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vmul32.uu $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_MUL32UUD80V, "mul32uud80v", "vmul32.uu", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop56.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP561D80V, "op561d80v", "vop56.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop57.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP571D80V, "op571d80v", "vop57.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop58.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP581D80V, "op581d80v", "vop58.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop59.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP591D80V, "op591d80v", "vop59.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop60.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP601D80V, "op601d80v", "vop60.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop61.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP611D80V, "op611d80v", "vop61.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop62.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP621D80V, "op621d80v", "vop62.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vop63.1 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_OP631D80V, "op631d80v", "vop63.1", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mov $v80d32reg,$v80imm$v80mods */
   {
@@ -57647,642 +57649,642 @@ static const CGEN_IBASE vc4_cgen_insn_table[MAX_INSNS] =
 /* v8ld $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8LDGEN, "v8ldgen", "v8ld", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8lookupm $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8LOOKUPMGEN, "v8lookupmgen", "v8lookupm", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8lookupml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8LOOKUPMLGEN, "v8lookupmlgen", "v8lookupml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem03 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM03GEN, "v8mem03gen", "v8mem03", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8st $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8STGEN, "v8stgen", "v8st", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8indexwritem $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8INDEXWRITEMGEN, "v8indexwritemgen", "v8indexwritem", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8indexwriteml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8INDEXWRITEMLGEN, "v8indexwritemlgen", "v8indexwriteml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem07 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM07GEN, "v8mem07gen", "v8mem07", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8memread $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEMREADGEN, "v8memreadgen", "v8memread", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8memwrite $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEMWRITEGEN, "v8memwritegen", "v8memwrite", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem10 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM10GEN, "v8mem10gen", "v8mem10", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem11 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM11GEN, "v8mem11gen", "v8mem11", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem12 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM12GEN, "v8mem12gen", "v8mem12", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem13 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM13GEN, "v8mem13gen", "v8mem13", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem14 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM14GEN, "v8mem14gen", "v8mem14", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem15 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM15GEN, "v8mem15gen", "v8mem15", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem16 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM16GEN, "v8mem16gen", "v8mem16", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem17 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM17GEN, "v8mem17gen", "v8mem17", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem18 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM18GEN, "v8mem18gen", "v8mem18", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem19 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM19GEN, "v8mem19gen", "v8mem19", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem20 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM20GEN, "v8mem20gen", "v8mem20", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem21 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM21GEN, "v8mem21gen", "v8mem21", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem22 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM22GEN, "v8mem22gen", "v8mem22", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem23 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM23GEN, "v8mem23gen", "v8mem23", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem25 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM25GEN, "v8mem25gen", "v8mem25", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem26 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM26GEN, "v8mem26gen", "v8mem26", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem27 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM27GEN, "v8mem27gen", "v8mem27", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem28 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM28GEN, "v8mem28gen", "v8mem28", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem29 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM29GEN, "v8mem29gen", "v8mem29", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem30 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM30GEN, "v8mem30gen", "v8mem30", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8mem31 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V8MEM31GEN, "v8mem31gen", "v8mem31", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16ld $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16LDGEN, "v16ldgen", "v16ld", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16lookupm $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16LOOKUPMGEN, "v16lookupmgen", "v16lookupm", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16lookupml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16LOOKUPMLGEN, "v16lookupmlgen", "v16lookupml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem03 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM03GEN, "v16mem03gen", "v16mem03", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16st $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16STGEN, "v16stgen", "v16st", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16indexwritem $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16INDEXWRITEMGEN, "v16indexwritemgen", "v16indexwritem", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16indexwriteml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16INDEXWRITEMLGEN, "v16indexwritemlgen", "v16indexwriteml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem07 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM07GEN, "v16mem07gen", "v16mem07", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16memread $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEMREADGEN, "v16memreadgen", "v16memread", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16memwrite $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEMWRITEGEN, "v16memwritegen", "v16memwrite", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem10 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM10GEN, "v16mem10gen", "v16mem10", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem11 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM11GEN, "v16mem11gen", "v16mem11", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem12 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM12GEN, "v16mem12gen", "v16mem12", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem13 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM13GEN, "v16mem13gen", "v16mem13", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem14 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM14GEN, "v16mem14gen", "v16mem14", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem15 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM15GEN, "v16mem15gen", "v16mem15", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem16 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM16GEN, "v16mem16gen", "v16mem16", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem17 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM17GEN, "v16mem17gen", "v16mem17", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem18 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM18GEN, "v16mem18gen", "v16mem18", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem19 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM19GEN, "v16mem19gen", "v16mem19", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem20 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM20GEN, "v16mem20gen", "v16mem20", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem21 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM21GEN, "v16mem21gen", "v16mem21", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem22 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM22GEN, "v16mem22gen", "v16mem22", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem23 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM23GEN, "v16mem23gen", "v16mem23", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem25 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM25GEN, "v16mem25gen", "v16mem25", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem26 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM26GEN, "v16mem26gen", "v16mem26", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem27 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM27GEN, "v16mem27gen", "v16mem27", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem28 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM28GEN, "v16mem28gen", "v16mem28", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem29 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM29GEN, "v16mem29gen", "v16mem29", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem30 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM30GEN, "v16mem30gen", "v16mem30", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v16mem31 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V16MEM31GEN, "v16mem31gen", "v16mem31", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32ld $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32LDGEN, "v32ldgen", "v32ld", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32lookupm $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32LOOKUPMGEN, "v32lookupmgen", "v32lookupm", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32lookupml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32LOOKUPMLGEN, "v32lookupmlgen", "v32lookupml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem03 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM03GEN, "v32mem03gen", "v32mem03", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32st $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32STGEN, "v32stgen", "v32st", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32indexwritem $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32INDEXWRITEMGEN, "v32indexwritemgen", "v32indexwritem", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32indexwriteml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32INDEXWRITEMLGEN, "v32indexwritemlgen", "v32indexwriteml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem07 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM07GEN, "v32mem07gen", "v32mem07", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32memread $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEMREADGEN, "v32memreadgen", "v32memread", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32memwrite $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEMWRITEGEN, "v32memwritegen", "v32memwrite", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem10 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM10GEN, "v32mem10gen", "v32mem10", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem11 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM11GEN, "v32mem11gen", "v32mem11", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem12 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM12GEN, "v32mem12gen", "v32mem12", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem13 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM13GEN, "v32mem13gen", "v32mem13", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem14 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM14GEN, "v32mem14gen", "v32mem14", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem15 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM15GEN, "v32mem15gen", "v32mem15", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem16 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM16GEN, "v32mem16gen", "v32mem16", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem17 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM17GEN, "v32mem17gen", "v32mem17", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem18 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM18GEN, "v32mem18gen", "v32mem18", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem19 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM19GEN, "v32mem19gen", "v32mem19", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem20 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM20GEN, "v32mem20gen", "v32mem20", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem21 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM21GEN, "v32mem21gen", "v32mem21", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem22 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM22GEN, "v32mem22gen", "v32mem22", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem23 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM23GEN, "v32mem23gen", "v32mem23", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem25 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM25GEN, "v32mem25gen", "v32mem25", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem26 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM26GEN, "v32mem26gen", "v32mem26", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem27 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM27GEN, "v32mem27gen", "v32mem27", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem28 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM28GEN, "v32mem28gen", "v32mem28", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem29 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM29GEN, "v32mem29gen", "v32mem29", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem30 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM30GEN, "v32mem30gen", "v32mem30", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v32mem31 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_V32MEM31GEN, "v32mem31gen", "v32mem31", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkld $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKLDGEN, "vunkldgen", "vunkld", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunklookupm $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKLOOKUPMGEN, "vunklookupmgen", "vunklookupm", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunklookupml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKLOOKUPMLGEN, "vunklookupmlgen", "vunklookupml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem03 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM03GEN, "vunkmem03gen", "vunkmem03", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkst $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKSTGEN, "vunkstgen", "vunkst", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkindexwritem $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKINDEXWRITEMGEN, "vunkindexwritemgen", "vunkindexwritem", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkindexwriteml $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKINDEXWRITEMLGEN, "vunkindexwritemlgen", "vunkindexwriteml", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem07 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM07GEN, "vunkmem07gen", "vunkmem07", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmemread $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEMREADGEN, "vunkmemreadgen", "vunkmemread", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmemwrite $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEMWRITEGEN, "vunkmemwritegen", "vunkmemwrite", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem10 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM10GEN, "vunkmem10gen", "vunkmem10", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem11 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM11GEN, "vunkmem11gen", "vunkmem11", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem12 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM12GEN, "vunkmem12gen", "vunkmem12", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem13 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM13GEN, "vunkmem13gen", "vunkmem13", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem14 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM14GEN, "vunkmem14gen", "vunkmem14", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem15 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM15GEN, "vunkmem15gen", "vunkmem15", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem16 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM16GEN, "vunkmem16gen", "vunkmem16", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem17 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM17GEN, "vunkmem17gen", "vunkmem17", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem18 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM18GEN, "vunkmem18gen", "vunkmem18", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem19 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM19GEN, "vunkmem19gen", "vunkmem19", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem20 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM20GEN, "vunkmem20gen", "vunkmem20", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem21 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM21GEN, "vunkmem21gen", "vunkmem21", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem22 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM22GEN, "vunkmem22gen", "vunkmem22", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem23 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM23GEN, "vunkmem23gen", "vunkmem23", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem25 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM25GEN, "vunkmem25gen", "vunkmem25", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem26 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM26GEN, "vunkmem26gen", "vunkmem26", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem27 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM27GEN, "vunkmem27gen", "vunkmem27", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem28 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM28GEN, "vunkmem28gen", "vunkmem28", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem29 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM29GEN, "vunkmem29gen", "vunkmem29", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem30 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM30GEN, "vunkmem30gen", "vunkmem30", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vunkmem31 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VUNKMEM31GEN, "vunkmem31gen", "vunkmem31", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vgetacc $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VGETACC, "vgetacc", "vgetacc", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80SETFOK)|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vgetaccs32 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VGETACCS32, "vgetaccs32", "vgetaccs32", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80SETFOK)|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vgetaccunk $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VGETACCUNK, "vgetaccunk", "vgetaccunk", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80SETFOK)|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* vgetaccs16 $v80d32reg,$v80a32reg,$v80b32reg$v80mods */
   {
     VC4_INSN_VGETACCS16, "vgetaccs16", "vgetaccs16", 80,
-    { 0, { { { (1<<MACH_BASE), 0 } } } }
+    { 0|A(DUAL80SETFOK)|A(DUAL80), { { { (1<<MACH_BASE), 0 } } } }
   },
 /* v8ld $v80d32reg,$v80a32reg,$v80imm$v80mods */
   {

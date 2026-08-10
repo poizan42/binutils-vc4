@@ -185,6 +185,24 @@
   (default #f)
 )
 
+(define-attr
+  (type boolean)
+  (for insn macro-insn)
+  (name DUAL80)
+  (comment "80-bit vector form with a 48-bit twin; disassembler marks it {wide} when narrowable")
+  (values #f #t)
+  (default #f)
+)
+
+(define-attr
+  (type boolean)
+  (for insn macro-insn)
+  (name DUAL80SETFOK)
+  (comment "a DUAL80 form whose 48-bit twin can also carry SETF (getacc), so SETF alone stays narrowable")
+  (values #f #t)
+  (default #f)
+)
+
 ;; Fields in the first instruction word.
 
 (df f-oplen "Opcode length field" () 15 4 UINT #f #f)
