@@ -597,7 +597,13 @@ parse_vector_reg (CGEN_CPU_DESC cd, const char **strp, int opindex,
       if (whichop == OP_B)
         return "B operand has no absent form ('-' would mean r0); name the register explicitly";
 
-      *valuep = 0x380;
+      /* An absent 80-bit operand carries the canonical scalar_reg=15 sentinel
+         in bits 12-15 (0xf380 == 0x380 | (15 << 12)), matching a present
+         operand's default (see the extended tail below) and stock firmware
+         (#131).  The field is inert on silicon (#103) -- this is byte-fidelity.
+         The 48-bit forms have no room for it: parse_vec48hvec/vvec reject any
+         value above 0x3ff, so the narrow dash stays 0x380.  */
+      *valuep = extended ? 0xf380 : 0x380;
       *strp = ptr + 1;
 
       return 0;

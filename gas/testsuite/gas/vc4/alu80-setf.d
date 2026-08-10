@@ -13,7 +13,7 @@ Disassembly of section \.text:
    0:	00 ff 30 c5 0c ab 	v32add HY\(20,0\),HY\(10,0\),HY\(12,0\) SETF
    6:	c0 f3 3c 00 
    a:	00 ff 38 c5 0c 0b 	v32add HY\(20,0\),-,HY\(12,0\) SETF
-  10:	00 f0 3c 00 
+  10:	c0 f3 3c 00 
   14:	00 fd 20 85 0c aa 	v16add HX\(20,0\),HX\(10,0\),HX\(12,0\) SETF
   1a:	c0 f3 3c 00 
   1e:	00 f7 38 c5 47 04 	v32add HY\(20,0\),-,0x7 SETF
