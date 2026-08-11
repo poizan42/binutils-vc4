@@ -1072,6 +1072,35 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
             return "error parsing scalar update reg";
           sru_p = true;
         }
+      /* #134: the printer emits max2/max4/max6 for SRU func 2/4/6 (lowercase, so
+         no collision with "MAX" above); accept them so those forms round-trip.  */
+      else if (strncmp (*strp, "max2", 4) == 0)
+        {
+          if (acc_p)
+            return "can't have max2 with ACC";
+          (*strp) += 4;
+          if (parse_scalar_reg_update (strp, &acc_sru, 2))
+            return "error parsing scalar update reg";
+          sru_p = true;
+        }
+      else if (strncmp (*strp, "max4", 4) == 0)
+        {
+          if (acc_p)
+            return "can't have max4 with ACC";
+          (*strp) += 4;
+          if (parse_scalar_reg_update (strp, &acc_sru, 4))
+            return "error parsing scalar update reg";
+          sru_p = true;
+        }
+      else if (strncmp (*strp, "max6", 4) == 0)
+        {
+          if (acc_p)
+            return "can't have max6 with ACC";
+          (*strp) += 4;
+          if (parse_scalar_reg_update (strp, &acc_sru, 6))
+            return "error parsing scalar update reg";
+          sru_p = true;
+        }
       else
         return "unexpected modifier";
     }

@@ -45,3 +45,23 @@ Disassembly of section \.text:
   a6:	c0 f3 bc 09 
   aa:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) CLRA UDEC
   b0:	c0 f3 fc 09 
+  b4:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) CLRA
+  ba:	c0 f3 3c 01 
+  be:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) WBA
+  c4:	c0 f3 bc 00 
+  c8:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) SUB
+  ce:	c0 f3 7c 00 
+  d2:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) SIGN
+  d8:	c0 f3 3c 02 
+  dc:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) HIGH
+  e2:	c0 f3 3c 04 
+  e6:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) CLRA WBA
+  ec:	c0 f3 bc 01 
+  f0:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) CLRA HIGH SIGN WBA SUB
+  f6:	c0 f3 fc 07 
+  fa:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) max2 r0
+ 100:	c0 f3 3c 14 
+ 104:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) max4 r7
+ 10a:	c0 f3 fc 19 
+ 10e:	00 fe 38 e0 14 03 	v32mov -,HY\(20,0\) max6 r3
+ 114:	c0 f3 fc 1c 

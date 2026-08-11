@@ -636,6 +636,18 @@ print_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
       if (i == 16)
         abort ();
     }
+  else
+    {
+      /* #134: neither SRU nor a full ENA accumulator op, but some acc bits are
+         set (e.g. a bare CLRA, or the firmware CLRA|WBA).  parse_vec80mods
+         accepts each of these as a standalone token, so print them individually
+         so the form round-trips (order is irrelevant -- the parser loops).  */
+      if (acc_sru & CLRA_BIT) (*info->fprintf_func) (info->stream, " CLRA");
+      if (acc_sru & HIGH_BIT) (*info->fprintf_func) (info->stream, " HIGH");
+      if (acc_sru & SIGN_BIT) (*info->fprintf_func) (info->stream, " SIGN");
+      if (acc_sru & WBA_BIT)  (*info->fprintf_func) (info->stream, " WBA");
+      if (acc_sru & SUB_BIT)  (*info->fprintf_func) (info->stream, " SUB");
+    }
 }
 
 static void

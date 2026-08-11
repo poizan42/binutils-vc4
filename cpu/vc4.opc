@@ -1085,6 +1085,35 @@ parse_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
             return "error parsing scalar update reg";
           sru_p = true;
         }
+      /* #134: the printer emits max2/max4/max6 for SRU func 2/4/6 (lowercase, so
+         no collision with "MAX" above); accept them so those forms round-trip.  */
+      else if (strncmp (*strp, "max2", 4) == 0)
+        {
+          if (acc_p)
+            return "can't have max2 with ACC";
+          (*strp) += 4;
+          if (parse_scalar_reg_update (strp, &acc_sru, 2))
+            return "error parsing scalar update reg";
+          sru_p = true;
+        }
+      else if (strncmp (*strp, "max4", 4) == 0)
+        {
+          if (acc_p)
+            return "can't have max4 with ACC";
+          (*strp) += 4;
+          if (parse_scalar_reg_update (strp, &acc_sru, 4))
+            return "error parsing scalar update reg";
+          sru_p = true;
+        }
+      else if (strncmp (*strp, "max6", 4) == 0)
+        {
+          if (acc_p)
+            return "can't have max6 with ACC";
+          (*strp) += 4;
+          if (parse_scalar_reg_update (strp, &acc_sru, 6))
+            return "error parsing scalar update reg";
+          sru_p = true;
+        }
       else
         return "unexpected modifier";
     }
@@ -1969,6 +1998,18 @@ print_vec80mods (CGEN_CPU_DESC cd ATTRIBUTE_UNUSED,
       /* All cases should be covered above.  */
       if (i == 16)
         abort ();
+    }
+  else
+    {
+      /* #134: neither SRU nor a full ENA accumulator op, but some acc bits are
+         set (e.g. a bare CLRA, or the firmware CLRA|WBA).  parse_vec80mods
+         accepts each of these as a standalone token, so print them individually
+         so the form round-trips (order is irrelevant -- the parser loops).  */
+      if (acc_sru & CLRA_BIT) (*info->fprintf_func) (info->stream, " CLRA");
+      if (acc_sru & HIGH_BIT) (*info->fprintf_func) (info->stream, " HIGH");
+      if (acc_sru & SIGN_BIT) (*info->fprintf_func) (info->stream, " SIGN");
+      if (acc_sru & WBA_BIT)  (*info->fprintf_func) (info->stream, " WBA");
+      if (acc_sru & SUB_BIT)  (*info->fprintf_func) (info->stream, " SUB");
     }
 }
 
