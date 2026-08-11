@@ -92,12 +92,15 @@ vc4_reg_narrowable (unsigned long v, vc4_operand whichop, int *sreg_out)
   if (type == 14 || type == 15)
     {
       /* The DASH slot.  A `-' in the B slot prints a scalar `rN', which
-         parse_vector_reg has no 80-bit path to re-read.  A `-' in the D slot
-         can't be forced 80-bit either: the `{wide}' pseudo-prefix currently
-         fails to assemble any dash-D form (a pre-existing forcing gap, see the
-         docs) -- marking one would emit a `{wide}' line that won't reassemble.
-         A `-' in the A slot forces cleanly, so it alone stays narrowable.  */
-      if (whichop == OP_B || whichop == OP_D)
+         parse_vector_reg has no 80-bit path to re-read.  In the D/A slot a `-'
+         prints for ANY type-14/15 composite, dropping scalar_reg (bits 12-15),
+         the coordinate bits, the A fine-x bits, and the 14-vs-15 distinction --
+         and it always reassembles to the one canonical value 0xf380 (#131).  So
+         mark it only when the composite already IS 0xf380: a non-canonical dash
+         (stray scalar_reg / inert coord bits #103 / type 15) prints `-' too but
+         would reassemble to different bytes.  This is sound on any binary, and
+         closes the same latent hole for the A slot (dash-first stores).  */
+      if (whichop == OP_B || v != 0xf380)
         return false;
       *sreg_out = 15;
       return true;

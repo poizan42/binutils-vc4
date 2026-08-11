@@ -1,9 +1,9 @@
 #objdump: -dr
-#name: {wide} pseudo-prefix forces + round-trips the 80-bit vector form (#125/#132)
+#name: {wide} pseudo-prefix forces + round-trips the 80-bit vector form (#125/#132/#133)
 # {wide} forces the 80-bit encoding; the disassembler prints {wide} only on a NARROWABLE 80-bit
-# form.  #132 extends the marker to omit-A (vmov), immediate and ld/st families, and to the shared
-# +rN addend across operands.  Negative controls (imm>63, disagreeing addends, a predicated or
-# post-increment ld) are genuinely 80-bit-only and must NOT be marked.
+# form.  Covers omit-A (vmov), immediate and ld/st families, the shared +rN addend, and (#133) a
+# canonical absent (-) FIRST operand in the D slot (3-reg/omit-A) or A slot (stores).  Negative
+# controls (imm>63, disagreeing addends, a predicated or post-increment ld) must NOT be marked.
 
 .*:     file format .*
 
@@ -31,17 +31,23 @@ Disassembly of section \.text:
   5c:	41 f0 00 00 
   60:	90 fc 64 90 20 04 	\{wide\} v16eor VX\(0,1\)\+r4,VX\(0,1\)\+r4,32 IFZ
   66:	01 41 00 40 
-  6a:	10 f8 38 c0 80 03 	\{wide\} v32ld HY\(0,0\),\(r2\)
-  70:	c0 f3 08 00 
-  74:	90 f8 30 e0 80 03 	\{wide\} v32st HY\(0,0\),\(r2\)
-  7a:	c0 f3 08 00 
-  7e:	10 f8 38 c0 80 0b 	\{wide\} v32ld HY\(0,0\),\(r2\) SETF
-  84:	c0 f3 08 00 
-  88:	00 ff 30 c5 64 a4 	v32add HY\(20,0\),HY\(10,0\),100
-  8e:	c0 f3 00 00 
-  92:	00 ff 30 c5 0c a3 	v32add HY\(20,0\)\+r3,HY\(10,0\)\+r4,HY\(12,0\)
-  98:	00 31 3c 00 
-  9c:	10 f8 38 c0 80 03 	v32ld HY\(0,0\),\(r2\) IFNZ
-  a2:	c0 f3 08 60 
-  a6:	10 f8 38 c0 80 03 	v32ld HY\(0,0\),\(r2\+=r3\)
-  ac:	c0 f0 08 00 
+  6a:	20 fd 00 e0 02 00 	\{wide\} v16sub -,H\(0,0\),H\(2,0\)
+  70:	c0 f3 3c 00 
+  74:	00 fc 38 e0 20 02 	\{wide\} v16mov -,HX\(32,0\)
+  7a:	c0 f3 3c 00 
+  7e:	88 f8 38 e0 80 03 	\{wide\} v16st -,\(r0\)
+  84:	c0 f3 00 00 
+  88:	10 f8 38 c0 80 03 	\{wide\} v32ld HY\(0,0\),\(r2\)
+  8e:	c0 f3 08 00 
+  92:	90 f8 30 e0 80 03 	\{wide\} v32st HY\(0,0\),\(r2\)
+  98:	c0 f3 08 00 
+  9c:	10 f8 38 c0 80 0b 	\{wide\} v32ld HY\(0,0\),\(r2\) SETF
+  a2:	c0 f3 08 00 
+  a6:	00 ff 30 c5 64 a4 	v32add HY\(20,0\),HY\(10,0\),100
+  ac:	c0 f3 00 00 
+  b0:	00 ff 30 c5 0c a3 	v32add HY\(20,0\)\+r3,HY\(10,0\)\+r4,HY\(12,0\)
+  b6:	00 31 3c 00 
+  ba:	10 f8 38 c0 80 03 	v32ld HY\(0,0\),\(r2\) IFNZ
+  c0:	c0 f3 08 60 
+  c4:	10 f8 38 c0 80 03 	v32ld HY\(0,0\),\(r2\+=r3\)
+  ca:	c0 f0 08 00 

@@ -27,6 +27,12 @@
 	; so an immediate V-direction op with a +rN addend is narrowable (and marked).
 	{wide} v16and V(32,5),VX(0,1)+r1,62
 	{wide} v16eor VX(0,1)+r4,VX(0,1)+r4,32 IFZ
+	; #133: a canonical absent (`-') FIRST operand now forces + marks -- across the
+	; D slot (3-reg / omit-A) and the A slot (stores).  The gas scrubber used to eat
+	; the mnemonic/`-' space under {wide}; md_assemble now repairs it.
+	{wide} v16sub -,H(0,0),H(2,0)
+	{wide} v16mov -,HX(32,0)
+	{wide} v16st -,(r0)
 	; plain (rN) ld/st: narrowable; a lone SETF stays narrowable for ld (#132/H2).
 	{wide} v32ld HY(0,0),(r2)
 	{wide} v32st HY(0,0),(r2)

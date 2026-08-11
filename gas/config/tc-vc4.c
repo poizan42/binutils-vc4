@@ -192,6 +192,8 @@ md_assemble (char *str)
 {
   vc4_insn insn;
   char *errmsg;
+  char *asm_str = str;
+  char *fixed = NULL;
 
   /* Initialize GAS's cgen interface for a new instruction.  */
   gas_cgen_init_parse ();
@@ -201,10 +203,38 @@ md_assemble (char *str)
   vc4_force_wide = vc4_pending_wide;
   vc4_pending_wide = 0;
 
+  /* Work around gas's input scrubber: when the `{wide}' pseudo-prefix takes the
+     line's opcode slot, the real mnemonic is scrubbed in operand context, whose
+     rule deletes the whitespace before a leading `-' (absent first operand),
+     yielding e.g. "v16sub-,...".  The cgen CGEN_INSN_RX prefilters and the
+     parser (which consumes exactly one syntax space, without a blank-skip loop)
+     require that space, so re-insert it.  Fires only under `{wide}' and only
+     when a mnemonic token abuts `-'; no vc4 mnemonic contains `-', and a
+     non-corrupted `{wide}' line already has a space there (so no double space).  */
+  if (vc4_force_wide)
+    {
+      char *p = str;
+      while (ISSPACE (*p))
+	p++;
+      char *m = p;
+      while (*p && ! ISSPACE (*p) && *p != '-')
+	p++;
+      if (p != m && *p == '-')
+	{
+	  size_t n = p - str;
+	  fixed = xmalloc (strlen (str) + 2);
+	  memcpy (fixed, str, n);
+	  fixed[n] = ' ';
+	  strcpy (fixed + n + 1, p);
+	  asm_str = fixed;
+	}
+    }
+
   insn.insn = vc4_cgen_assemble_insn
-    (gas_cgen_cpu_desc, str, & insn.fields, insn.buffer, & errmsg);
+    (gas_cgen_cpu_desc, asm_str, & insn.fields, insn.buffer, & errmsg);
 
   vc4_force_wide = 0;
+  free (fixed);
 
   if (!insn.insn)
     {
