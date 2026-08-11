@@ -62,39 +62,140 @@ static int read_insn
 
 #define CGEN_PRINT_INSN vc4_print_insn
 
-/* #125: a DUAL80 80-bit vector form is "narrowable" -- a 48-bit form encodes
-   the same operands+modifiers -- when its aux word carries nothing 80-bit-only.
-   The disassembler prints a leading `{wide}' for such forms so the long
-   encoding round-trips (the assembler's `{wide}' pseudo-prefix forces it).
-   Reads the decoded composite fields (f_vec80{d,a,b}reg, f_vec80mods), which
-   are populated for the DUAL80-tagged 3-register v80mods forms.  */
+/* #125/#132: a DUAL80 80-bit vector form is "narrowable" -- a 48-bit form
+   encodes the same operands+modifiers -- when its aux word carries nothing
+   80-bit-only.  The disassembler prints a leading `{wide}' for such forms so
+   the long encoding round-trips (the assembler's `{wide}' pseudo-prefix forces
+   it).  The DUAL80OMITA/DUAL80IMMB/DUAL80MEMLD/DUAL80MEMST shape attributes say
+   which composite fields are live per family -- decode leaves the others
+   uninitialised, so the predicate must dispatch and read only the live ones.  */
 
-/* A register-composite operand is narrowable when its scalar_reg selector is
-   15 (absent/present-vector, encodes identically in 48- and 80-bit -- #131),
-   with no column offset (bit 10) and no post-increment (bit 11).  A scalar
-   `rN' (selector != 15) has no 48-bit-equivalent 80-bit spelling.  */
-#define VC4_NARROW_REG_OK(v) \
-  ((((v) >> 12) & 0xf) == 0xf && (((v) >> 10) & 1) == 0 && (((v) >> 11) & 1) == 0)
+/* Is one decoded 80-bit register composite representable in a 48-bit twin, and
+   if so what scalar addend (rN) does it imply?  Reads the composite exactly as
+   print_vector_reg_1 decodes it: direction/type nibble (v>>6)&15 (14/15 = the
+   DASH slot), column offset (bit 10), post-increment (bit 11), scalar_reg
+   (bits 12-15), and -- for an A operand -- fine-x in bits 16-19.
+
+   *sreg_out is set to the implied 48-bit scalar addend: 15 = none, else the rN
+   the 48-bit twin's $dplus_s/$aplus_s/$bplus_s must carry.  Returns false when
+   the operand has no 48-bit spelling at all (so the form stays 80-bit-only).  */
+
+static bool
+vc4_reg_narrowable (unsigned long v, vc4_operand whichop, int *sreg_out)
+{
+  unsigned type = (v >> 6) & 15;
+
+  /* A `*' column offset or `++' post-increment has no 48-bit spelling.  */
+  if (((v >> 10) & 1) || ((v >> 11) & 1))
+    return false;
+
+  if (type == 14 || type == 15)
+    {
+      /* The DASH slot.  A `-' in the B slot prints a scalar `rN', which
+         parse_vector_reg has no 80-bit path to re-read.  A `-' in the D slot
+         can't be forced 80-bit either: the `{wide}' pseudo-prefix currently
+         fails to assemble any dash-D form (a pre-existing forcing gap, see the
+         docs) -- marking one would emit a `{wide}' line that won't reassemble.
+         A `-' in the A slot forces cleanly, so it alone stays narrowable.  */
+      if (whichop == OP_B || whichop == OP_D)
+        return false;
+      *sreg_out = 15;
+      return true;
+    }
+
+  /* A real vector register.  For an A operand the fine-x low bits live in bits
+     16-19; the 48-bit H-family A cannot hold them (its x keeps only bits 4-5),
+     so an H-family A with fine-x has no 48-bit spelling.  The V-family A keeps
+     the low-x bits in a different field the 48-bit form does carry, so it is
+     fine.  Direction parity: even type nibble = H-family, odd = V-family.  */
+  if (whichop == OP_A && (type & 1) == 0 && ((v >> 16) & 15) != 0)
+    return false;
+
+  {
+    unsigned scalar = (v >> 12) & 15;
+    if (scalar == 15)            /* plain vector reg, no addend */
+      *sreg_out = 15;
+    else if (scalar <= 7)        /* "+rN" addend; the 48-bit SREG range is r0..r7 */
+      *sreg_out = (int) scalar;
+    else                         /* selectors 8..14 have no 48-bit spelling */
+      return false;
+  }
+  return true;
+}
 
 static bool
 vc4_is_narrowable (const CGEN_INSN *insn, CGEN_FIELDS *fields)
 {
-  /* Mods composite: rep (bits 0-2), setf (bit 3), predication (bits 4-6),
-     acc/sru (bits 7-13).  Any of rep/pred/acc/sru makes the form genuinely
-     80-bit.  SETF is subtler: a 48-bit SETF encoding exists for getacc (bit
-     Vsetf48), so SETF does NOT disqualify a getacc form (DUAL80SETFOK) -- but
-     the 48-bit ALU/mul row-B forms have no SETF, so there SETF forces 80-bit
-     and the form is NOT narrowable.  */
-  long modsmask = CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80SETFOK)
-                  ? ~(long) 0x8 : ~(long) 0;
-  if ((fields->f_vec80mods & modsmask) != 0)
+  int sd = 15, sa = 15, sb = 15, common = 15;
+
+  /* ld/st: a distinct mods layout (v80mods_mem: rep 0-2, setf 3, pred 4-6, no
+     acc/sru) and an address operand instead of a B register.  The 48-bit twin
+     carries a lone SETF but no predication/rep, and its base is a plain (rN).  */
+  if (CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80MEMLD)
+      || CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80MEMST))
+    {
+      bool is_ld = CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80MEMLD) != 0;
+      unsigned long addr = is_ld ? fields->f_vec80ldaddr : fields->f_vec80staddr;
+      long dummy = is_ld ? fields->f_dummyabits : fields->f_op27_22;
+
+      if ((fields->f_vec80mods_mem & ~(long) 0x8) != 0)   /* SETF ok; rep/pred not */
+        return false;
+      if ((addr & 0xffff) != 0)                           /* an address offset */
+        return false;
+      if (((addr >> 16) & 63) != 60)                      /* rad != absent: a `+=' post-mod */
+        return false;
+      if (dummy != 0)                                     /* lossy "A/D extra" bits */
+        return false;
+      /* The single register (D for ld, A for st).  The address base rs (0..15)
+         always fits the 48-bit `(rN)' so it needs no check.  */
+      return vc4_reg_narrowable (is_ld ? fields->f_vec80dreg : fields->f_vec80areg,
+                                 is_ld ? OP_D : OP_A, &sd);
+    }
+
+  /* register / immediate families share the v80mods layout.  Mods mask by
+     family: the immediate 48-bit twin carries setf+predication ($v48imm_mods,
+     bits 3-6); getacc carries a lone setf (DUAL80SETFOK); a plain row-B ALU/mul
+     twin carries neither, so any mods bit forces 80-bit.  acc/sru (bits 7+)
+     always force 80-bit.  */
+  {
+    long modsmask = CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80IMMB)   ? ~(long) 0x78
+                  : CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80SETFOK) ? ~(long) 0x8
+                  : ~(long) 0;
+    if ((fields->f_vec80mods & modsmask) != 0)
+      return false;
+  }
+
+  if (!vc4_reg_narrowable (fields->f_vec80dreg, OP_D, &sd))
     return false;
-  if (!VC4_NARROW_REG_OK (fields->f_vec80dreg))
+  if (!CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80OMITA)
+      && !vc4_reg_narrowable (fields->f_vec80areg, OP_A, &sa))
     return false;
-  if (!VC4_NARROW_REG_OK (fields->f_vec80areg))
+
+  if (CGEN_INSN_ATTR_VALUE (insn, CGEN_INSN_DUAL80IMMB))
+    {
+      /* f_vec80imm is the raw unsigned field value (always >= 0); the 48-bit
+         twin's B is a 6-bit uimm6.  */
+      if ((unsigned long) fields->f_vec80imm > 63)
+        return false;
+    }
+  else if (!vc4_reg_narrowable (fields->f_vec80breg, OP_B, &sb))
     return false;
-  if (!VC4_NARROW_REG_OK (fields->f_vec80breg))
-    return false;
+
+  /* The 48-bit twin pins ONE shared SREG for all its $?plus_s addends, so every
+     present operand's addend must be 15 (none) or a single common rN.  */
+  if (sd != 15)
+    common = sd;
+  if (sa != 15)
+    {
+      if (common != 15 && common != sa)
+        return false;
+      common = sa;
+    }
+  if (sb != 15)
+    {
+      if (common != 15 && common != sb)
+        return false;
+    }
   return true;
 }
 

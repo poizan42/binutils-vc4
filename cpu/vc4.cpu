@@ -203,6 +203,46 @@
   (default #f)
 )
 
+; #132: shape modifiers on a DUAL80 form, telling the disassembler's narrowability
+; predicate which operands are live and how to read them (CGEN leaves the other
+; families' composite fields uninitialised, so this dispatch is mandatory).
+
+(define-attr
+  (type boolean)
+  (for insn macro-insn)
+  (name DUAL80OMITA)
+  (comment "DUAL80 form with D and B but no A operand (vmov etc.); skip the A check")
+  (values #f #t)
+  (default #f)
+)
+
+(define-attr
+  (type boolean)
+  (for insn macro-insn)
+  (name DUAL80IMMB)
+  (comment "DUAL80 form whose B operand is the immediate v80imm; narrows only when it fits uimm6, and its 48-bit twin carries setf+predication")
+  (values #f #t)
+  (default #f)
+)
+
+(define-attr
+  (type boolean)
+  (for insn macro-insn)
+  (name DUAL80MEMLD)
+  (comment "DUAL80 load: v80mods_mem + ld address + dummyabits, single D register")
+  (values #f #t)
+  (default #f)
+)
+
+(define-attr
+  (type boolean)
+  (for insn macro-insn)
+  (name DUAL80MEMST)
+  (comment "DUAL80 store: v80mods_mem + st address + dummydbits, single A register")
+  (values #f #t)
+  (default #f)
+)
+
 ;; Fields in the first instruction word.
 
 (df f-oplen "Opcode length field" () 15 4 UINT #f #f)

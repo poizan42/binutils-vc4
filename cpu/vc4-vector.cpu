@@ -1108,7 +1108,7 @@
 
 (define-pmacro (vecdataop80_2 x-width x-name x-xflag)
   (define-normal-insn
-    (.sym (.downcase x-name) d80v x-width) (.str x-name "D80V" x-width) ()
+    (.sym (.downcase x-name) d80v x-width) (.str x-name "D80V" x-width) (DUAL80 DUAL80OMITA)
     (.str "v" x-width (.downcase x-name) " $v80d32reg,$v80b32reg$v80mods")
     (+ (f-op15-10 63) (f-op9 x-xflag) (.sym VECOP_ (.upcase x-name))
        v80mods v80d32reg (f-op21-16 56) (f-op47-44 0) (f-op57-52 60)
@@ -1153,7 +1153,7 @@
 
 (define-pmacro (vecdataopi80_3 x-width x-name x-xflag)
   (define-normal-insn
-    (.sym (.downcase x-name) d80i x-width) (.str x-name "D80I" x-width) ()
+    (.sym (.downcase x-name) d80i x-width) (.str x-name "D80I" x-width) (DUAL80 DUAL80IMMB)
     (.str "v" x-width (.downcase x-name)
       " $v80d32reg,$v80a32reg,$v80imm$v80mods")
     (+ (f-op15-10 63) (f-op9 x-xflag) (.sym VECOP_ (.upcase x-name))
@@ -1165,7 +1165,7 @@
 
 (define-pmacro (vecdataopi80_2 x-width x-name x-xflag)
   (define-normal-insn
-    (.sym (.downcase x-name) d80i x-width) (.str x-name "D80I" x-width) ()
+    (.sym (.downcase x-name) d80i x-width) (.str x-name "D80I" x-width) (DUAL80 DUAL80IMMB DUAL80OMITA)
     (.str "v" x-width (.downcase x-name) " $v80d32reg,$v80imm$v80mods")
     (+ (f-op15-10 63) (f-op9 x-xflag) (.sym VECOP_ (.upcase x-name))
        v80mods v80d32reg (f-op21-16 56) (f-op47-44 0) (f-op57-52 60)
@@ -1188,7 +1188,7 @@
 (define-pmacro (vecmulopi80 x-name x-signs x-xflag)
   (define-normal-insn
     (.sym (.downcase x-name) (.downcase x-signs) d80i)
-    (.str x-name x-signs "D80I") ()
+    (.str x-name x-signs "D80I") (DUAL80 DUAL80IMMB)
     (.str "v" (.downcase x-name) "." (.downcase x-signs)
       " $v80d32reg,$v80a32reg,$v80imm$v80mods")
     (+ (f-op15-10 63) (f-op9 x-xflag) (.sym VMULXOP_ x-name x-signs)
@@ -1208,7 +1208,7 @@
 
 (define-pmacro (vldinsn x-op x-width)
   (define-normal-insn
-    (.sym v x-width x-op) (.str "V" x-width (.upcase x-op)) ()
+    (.sym v x-width x-op) (.str "V" x-width (.upcase x-op)) (DUAL80 DUAL80MEMLD)
     (.str "v" x-width x-op " $v80d32reg,($vec_ldaddr)$v80mods_mem$dummyabits")
     (+ (f-op15-10 62) (.sym VMEMOP_ (.upcase x-op)) (.sym VMEMWIDTH_ x-width)
        v80mods_mem v80d32reg (f-op21-18 14) (f-op42 0) (f-op41-39 7)
@@ -1234,7 +1234,7 @@
 
 (define-pmacro (vstinsn x-op x-width)
   (define-normal-insn
-    (.sym v x-width x-op) (.str "V" x-width (.upcase x-op)) ()
+    (.sym v x-width x-op) (.str "V" x-width (.upcase x-op)) (DUAL80 DUAL80MEMST)
     (.str "v" x-width x-op " $v80a32reg,($vec_staddr)$v80mods_mem$dummydbits")
     (+ (f-op15-10 62) (.sym VMEMOP_ (.upcase x-op)) (.sym VMEMWIDTH_ x-width)
        v80mods_mem v80a32reg (f-op31-28 14) (f-op42 0) (f-op41-39 7)
@@ -1296,7 +1296,7 @@
 (define-pmacro (vgenmemiinsn x-op x-width)
   (define-normal-insn
     (.sym v x-width (.downcase x-op) igen)
-    (.str "V" x-width (.upcase x-op) "I") ()
+    (.str "V" x-width (.upcase x-op) "I") (DUAL80 DUAL80IMMB)
     (.str "v" x-width (.downcase x-op)
           " $v80d32reg,$v80a32reg,$v80imm$v80mods")
     (+ (f-op15-10 62) (.sym VMEMOP_ (.upcase x-op)) (.sym VMEMWIDTH_ x-width)
@@ -1317,7 +1317,7 @@
 (define-pmacro (vgetacciinsn x-sat)
   (define-normal-insn
     (.sym vgetacci x-sat)
-    (.str "VGETACCI" (.upcase x-sat)) ()
+    (.str "VGETACCI" (.upcase x-sat)) (DUAL80 DUAL80IMMB)
     (.str "vgetacc" x-sat
           " $v80d32reg,$v80a32reg,$v80imm$v80mods")
     (+ (f-op15-10 62) VMEMOP_GETACC (.sym VMEMSAT_ x-sat)
